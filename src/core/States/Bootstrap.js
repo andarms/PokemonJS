@@ -1,6 +1,5 @@
 import CONFIG from '../config';
 
-import Player from '../GameObjects/Player';
 
 class Bootstrap extends Phaser.State{
   create(){
@@ -15,8 +14,7 @@ class Bootstrap extends Phaser.State{
     // it can be from a state to a custom object, 
     // the only thing they should have are the onkeydown and onkeyup methods
     this.game.input.keyboard.addCallbacks(this, this.onkeydown, this.onkeyup);
-    let player = new Player(this.game, 0);
-    this.game.setCgo(player);
+    this.state.start('Preload');
   }
 
   onkeydown(){}

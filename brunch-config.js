@@ -5,18 +5,19 @@ module.exports = {
     javascripts: {
       joinTo: {
         'game.js':   /^src\/core/,
-        'vendor.js': /(^bower_components|node_modules|vendor)\//
+        'modules.js': /(^bower_components|node_modules)\//,
+        'vendor.js': /^vendor\/libs/
       }
     }
   },
   npm: {
     static: [
-      'node_modules/phaser-ce/build/phaser.js',
+      'node_modules/phaser-ce/build/phaser.js'
     ]
   },
   paths: {
     public: 'build',
-    watched: ['src']
+    watched: ['src', 'vendor']
   },
   plugins: {
     babel: {
