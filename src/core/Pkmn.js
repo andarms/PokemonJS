@@ -16,15 +16,23 @@ class Pkmn{
     if(callback){
       this.game.eventQueue.push({
         func: ()=>{
-          callback();
+          callback.apply(this.scope);
         },
-        scope: this
+        scope: this.scope
       });
     }
   }
 
-  start(){
+  end(){
     this.game.eventEndSignal.dispatch();
+  }
+
+  continue(){
+    this.game.eventEndSignal.dispatch();
+  }
+
+  start(scope){
+    this.scope = scope;
   }
 }
 
