@@ -1,5 +1,5 @@
-import CONFIG from './config'
-import Bootstrap from './States/Bootstrap'
+import CONFIG from './config';
+import Bootstrap from './States/Bootstrap';
 
 class Game extends Phaser.Game{
   constructor(){
@@ -7,7 +7,7 @@ class Game extends Phaser.Game{
 
     this.state.add('Bootstrap', Bootstrap);
 
-    // allias to the current game object that has control of the keyboard
+    // alias to the current game object that has control of the keyboard
     this.cgo = null;
 
     this.state.start('Bootstrap');

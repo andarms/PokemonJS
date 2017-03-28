@@ -1,5 +1,7 @@
 import CONFIG from '../config';
 
+import Player from '../GameObjects/Player';
+
 class Bootstrap extends Phaser.State{
   create(){
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -13,13 +15,15 @@ class Bootstrap extends Phaser.State{
     // it can be from a state to a custom object, 
     // the only thing they should have are the onkeydown and onkeyup methods
     this.game.input.keyboard.addCallbacks(this, this.onkeydown, this.onkeyup);
+    let player = new Player(this.game, 0);
+    this.game.setCgo(player);
   }
 
   onkeydown(){}
   onkeyup(event){
     // Only calls the onkeyup method of the cgo when the key pressed is in the keyboard control list.
     if(CONFIG.KEYBAORD_CONTROLS.includes(event.keyCode)){
-      console.log(event.keyCode)
+      this.game.cgo.onkeyup(event.keyCode);
     }
   }
 }
