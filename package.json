@@ -1,0 +1,21 @@
+{
+  "name": "pkmnjs",
+  "version": "0.0.1",
+  "description": "Javascript Pokemon Game",
+  "main": "main.js",
+  "dependencies": {
+    "phaser-ce": "^2.7.1"
+  },
+  "devDependencies": {
+    "auto-reload-brunch": "^2.0.0",
+    "babel-brunch": "^6.0.6",
+    "brunch": "^2.0.0",
+    "clean-css-brunch": "^2.0.0",
+    "css-brunch": "^2.0.0",
+    "electron": "^1.6.2",
+    "javascript-brunch": "^2.0.0",
+    "uglify-js-brunch": "^2.0.0"
+  },
+  "author": "Adrian Manjarres",
+  "license": "MIT"
+}
