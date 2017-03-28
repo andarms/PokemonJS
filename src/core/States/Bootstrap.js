@@ -7,6 +7,10 @@ class Bootstrap extends Phaser.State{
     this.stage.smoothed = false;
     this.game.antialias = false;
 
+
+    // Force to load font
+    var text = this.game.add.text(0, 0, "Force to load Font", CONFIG.FONT_STYLE);
+
     // This state and only this state is in charge of handling user inputs. 
     // This way I can avoid the overload of keyboard events and make things a bit more organized.
     // The idea is to have an alias "this.game.cgo" (Current Game Object)
@@ -14,16 +18,33 @@ class Bootstrap extends Phaser.State{
     // it can be from a state to a custom object, 
     // the only thing they should have are the onkeydown and onkeyup methods
     this.game.input.keyboard.addCallbacks(this, this.onkeydown, this.onkeyup);
+
+
+    this.game.eventEndSignal.add(this.eventEndListener, this);
+
     this.state.start('Preload');
   }
 
   onkeydown(){}
+  
   onkeyup(event){
     // Only calls the onkeyup method of the cgo when the key pressed is in the keyboard control list.
     if(CONFIG.KEYBAORD_CONTROLS.includes(event.keyCode)){
-      this.game.cgo.onkeyup(event.keyCode);
+      if(this.game.cgo){
+        this.game.cgo.onkeyup(event.keyCode);
+      }
     }
   }
+
+  eventEndListener(){
+    let event = this.game.eventQueue.shift();
+    if(event){
+      event.func.apply(event.scope);
+    }else{
+      this.game.releaseCgo();
+    }
+  }
+
 }
 
 export default Bootstrap;
