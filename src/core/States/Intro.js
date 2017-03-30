@@ -1,4 +1,5 @@
 import {PKMN} from '../main';
+import DATA from '../Data';
 
 class Intro extends Phaser.State{
   create(){
@@ -48,13 +49,13 @@ class Intro extends Phaser.State{
         {text: "BOY", action: this.boySelected},
         {text: "GIRL", action: this.girlSelected}
       ];
-      PKMN.choice(text, options, 0)
+      PKMN.choice(text, 'gender', options, 0)
       PKMN.continue();
     });
   }
 
   boySelected(){
-    console.log("boy")
+    console.log(DATA.FLAGS['gender']);
   }
 
   girlSelected(){

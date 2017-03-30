@@ -1,8 +1,10 @@
 import CONFIG from '../config';
+import DATA from '../Data';
+
 import Message from './Message';
 
 class Choice extends Phaser.Group{
-  constructor(game, x, y, text, options, defaultOption, optionsCtx){
+  constructor(game, x, y, text, flag, options, defaultOption, optionsCtx){
     super(game);
     var windowSkin = new Phaser.NinePatchImage(this.game, x, y, 'choice_1');
     windowSkin.targetWidth = 48;
@@ -35,6 +37,7 @@ class Choice extends Phaser.Group{
     this.selarrow.y = this.options[this.optionsIndex].y + 2; 
 
     this.defaultOption = defaultOption;
+    this.flag = flag;
 
     this.message = new Message(this.game, text, true);
     this.add(this.message);
@@ -46,7 +49,9 @@ class Choice extends Phaser.Group{
   onkeyup(key){
     if(this.message.alive){
       this.message.onkeyup(key);
-      this.menu.visible = true;
+      if(!this.message.alive){
+        this.menu.visible = true;
+      }
       return;
     }
     if(key == Phaser.Keyboard.UP){
@@ -66,9 +71,10 @@ class Choice extends Phaser.Group{
       this.selarrow.y = this.options[this.optionsIndex].y + 2; 
     }
     if(key == Phaser.Keyboard.X || key == Phaser.Keyboard.ENTER){
+      DATA.FLAGS[this.flag] = this.optionsIndex + 1;
       this.options[this.optionsIndex].action.apply(this.optionsCtx);
       this.game.eventEndSignal.dispatch();
-      this.destroy();
+      this.destroy();      
     }
     
     // Select the deafult option based on this.defaultOption    
@@ -77,10 +83,12 @@ class Choice extends Phaser.Group{
     if(key == Phaser.Keyboard.Z){
       console.log(this.defaultOption)
       if(this.defaultOption != 0 && this.defaultOption != -1){
+        DATA.FLAGS[this.flag] = this.defaultOption;
         this.options[this.defaultOption - 1 ].action.apply(this.optionsCtx);
         this.game.eventEndSignal.dispatch();
         this.destroy();
       }else if(this.defaultOption == -1){
+        DATA.FLAGS[this.flag] = this.defaultOption;
         this.game.eventEndSignal.dispatch();
         this.destroy();
       }
