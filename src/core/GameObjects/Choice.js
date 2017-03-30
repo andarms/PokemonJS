@@ -71,7 +71,7 @@ class Choice extends Phaser.Group{
       this.selarrow.y = this.options[this.optionsIndex].y + 2; 
     }
     if(key == Phaser.Keyboard.X || key == Phaser.Keyboard.ENTER){
-      DATA.FLAGS[this.flag] = this.optionsIndex + 1;
+      DATA.FLAGS[this.flag] = this.options[this.optionsIndex].value != null ? this.options[this.optionsIndex].value :  this.optionsIndex + 1;
       this.options[this.optionsIndex].action.apply(this.optionsCtx);
       this.game.eventEndSignal.dispatch();
       this.destroy();      
@@ -81,9 +81,8 @@ class Choice extends Phaser.Group{
     // (or 0 if the player can't cancel or -1 to don't choice any)
     // this.defaultOption is in length language and dont in array index language
     if(key == Phaser.Keyboard.Z){
-      console.log(this.defaultOption)
       if(this.defaultOption != 0 && this.defaultOption != -1){
-        DATA.FLAGS[this.flag] = this.defaultOption;
+        DATA.FLAGS[this.flag] = this.options[this.defaultOption - 1] != null ? this.options[this.defaultOption - 1].value : this.defaultOption;
         this.options[this.defaultOption - 1 ].action.apply(this.optionsCtx);
         this.game.eventEndSignal.dispatch();
         this.destroy();

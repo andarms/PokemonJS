@@ -26,12 +26,12 @@ class Pkmn{
 
 /**
 * @function choice
-* @param  string text                                   Message to show
-* @param  string flag                                   Message to show
-* @param  Array[{string text, function action}] options List of options to choice, text is the text of the choice
-*                                                         action is the function to execute.
-* @param  int defaultOption                             Is the choice used when the player cancels 
-*                                                        (or 0 if the player can't cancel or -1 to don't choice any)
+* @param  string text                                       Message to show
+* @param  string flag                                       Flag name to store selected value e.g DATA.FLAGS[flag]
+* @param  Array[{string text, function action, any value}]  Options List of options to choice, text is the text of the choice
+*                                                             action is the function to execute.
+* @param  int defaultOption                                 Is the choice used when the player cancels 
+*                                                             (or 0 if the player can't cancel or -1 to don't choice any)
 * @example
 * // let text = "Text to show before choice";
 * // let options = [
@@ -48,6 +48,7 @@ class Pkmn{
 * @return  Set them DATA.FLAGS[flag] var with the index of the selected option
 */
   choice(text, flag, options, defaultOption){
+    // Posible add the value attr to the option object to set the flag with that value.
     this.game.eventQueue.push({
       func: ()=>{
         let c = new Choice(this.game, 0, 0, text, flag, options, defaultOption, this.scope);

@@ -2,6 +2,12 @@ class Player extends Phaser.Sprite{
   constructor(game, gender){
     let sprite = 'trchar00' + gender;
     super(game, 0, 0, sprite);
+    this.gender = gender;
+    if(this.gender == 0){
+      this.frontSprite = 'introBoy';
+    }else{
+      this.frontSprite = 'introGirl';
+    }
   }
 
   onkeydown(key){

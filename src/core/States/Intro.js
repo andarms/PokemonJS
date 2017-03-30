@@ -1,5 +1,6 @@
 import {PKMN} from '../main';
 import DATA from '../Data';
+import Player from '../GameObjects/Player';
 
 class Intro extends Phaser.State{
   create(){
@@ -46,20 +47,21 @@ class Intro extends Phaser.State{
     tween2.onComplete.add(()=>{
       let text = "But first, tell me a little about yourself.[/p] Now tell me. Are you a boy? Or are you a girl?";
       let options = [
-        {text: "BOY", action: this.boySelected},
-        {text: "GIRL", action: this.girlSelected}
+        {text: "BOY", action: this.genderSelected, value: 0},
+        {text: "GIRL", action: this.genderSelected, value: 1}
       ];
       PKMN.choice(text, 'gender', options, 0)
       PKMN.continue();
     });
   }
 
-  boySelected(){
-    console.log(DATA.FLAGS['gender']);
-  }
-
-  girlSelected(){
-    console.log("girl")
+  genderSelected(){
+    let gender = DATA.FLAGS['gender'];
+    DATA.player = new Player(this.game, gender);
+    this.game.world.remove(this.professor);
+    this.playerSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY-30, DATA.player.frontSprite);
+    this.playerSprite.anchor.set(.5, .5);
+    PKMN.msgbox("First, what is your name?");
   }
 
 }

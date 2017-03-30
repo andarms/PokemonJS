@@ -74,7 +74,7 @@ class Message extends Phaser.Group{
     return whitespace.test(char);
   }
 
-  showNextLine(event){    
+  showNextLine(){        
     if(!this.alive) return;
     if(this.paragraphsIndex == this.paragraphs.length){
         this.alive = false;
@@ -106,8 +106,10 @@ class Message extends Phaser.Group{
   }
 
 
-  onkeyup(){
-    this.showNextLine()
+  onkeyup(key){
+    if(key == Phaser.Keyboard.X || key == Phaser.Keyboard.Z || key == Phaser.Keyboard.ENTER){
+      this.showNextLine();
+    }
   }
 
   update(){
