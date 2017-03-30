@@ -1,4 +1,5 @@
 import {PKMN} from '../main';
+
 class Intro extends Phaser.State{
   create(){
     this.game.add.sprite(0, 0, 'introbg');
@@ -38,14 +39,28 @@ class Intro extends Phaser.State{
   }
 
   intro2(){
-    let tween1 = this.game.add.tween(this.pokepet).to( { alpha: 0 }, 500, Phaser.Easing.Linear.None, true); 
+    let tween1 = this.game.add.tween(this.pokepet).to({ alpha: 0 }, 500, Phaser.Easing.Linear.None, true); 
     let tween2 = this.game.add.tween(this.professor).to( {alpha: 1 }, 500, Phaser.Easing.Linear.None);
     tween1.chain(tween2);
     tween2.onComplete.add(()=>{
-      PKMN.msgbox("But first, tell me a little about yourself.[/p] Now tell me. Are you a boy? Or are you a girl?")
+      let text = "But first, tell me a little about yourself.[/p] Now tell me. Are you a boy? Or are you a girl?";
+      let options = [
+        {text: "BOY", action: this.boySelected},
+        {text: "GIRL", action: this.girlSelected}
+      ];
+      PKMN.choice(text, options)
       PKMN.continue();
     });
   }
+
+  boySelected(){
+    console.log("boy")
+  }
+
+  girlSelected(){
+    console.log("girl")
+  }
+
 }
 
 export default Intro;

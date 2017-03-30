@@ -1,7 +1,7 @@
 import CONFIG from '../config';
 
 class Message extends Phaser.Group{
-  constructor(game, text){
+  constructor(game, text, keep){
     super(game);
     let y = this.game.camera.view.y + 288
     let x = this.game.camera.view.x
@@ -22,7 +22,7 @@ class Message extends Phaser.Group{
     this.line1 =  this.game.add.text(x+paddingLeft, y+paddingTop, "", CONFIG.FONT_STYLE);
     this.line2 =  this.game.add.text(x+paddingLeft, y+paddingTop+40, "", CONFIG.FONT_STYLE);
     
-    this.game.input.keyboard.busy = true;
+    this.keep = keep || false;
     // this.game.player.lock()
     // this.game.GFX.select.play();
 
@@ -77,10 +77,11 @@ class Message extends Phaser.Group{
   showNextLine(event){    
     if(!this.alive) return;
     if(this.paragraphsIndex == this.paragraphs.length){
-        this.game.input.keyboard.busy = false;
         this.alive = false;
-        this.game.world.remove(this);
-        this.game.eventEndSignal.dispatch();
+        if(!this.keep){
+          this.game.eventEndSignal.dispatch();
+          this.destroy();
+        }
         return;
     }
     // this.game.GFX.select.play();
