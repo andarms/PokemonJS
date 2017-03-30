@@ -48,7 +48,7 @@ class Intro extends Phaser.State{
         {text: "BOY", action: this.boySelected},
         {text: "GIRL", action: this.girlSelected}
       ];
-      PKMN.choice(text, options)
+      PKMN.choice(text, options, 0)
       PKMN.continue();
     });
   }

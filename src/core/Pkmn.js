@@ -24,17 +24,19 @@ class Pkmn{
     }
   }
 
-  choice(text, options){
-    // this.game.eventQueue.push({
-    //   func: ()=>{
-    //     let m = new Message(this.game, text, true);
-    //     this.game.setCgo(m);
-    //   },
-    //   scope: this
-    // });
+/**
+* @function choice
+* @param  string text                                   Message to show
+* @param  Array[{string text, function action}] options List of options to choice, text is the text of the choice
+*                                                         action is the function to execute.
+* @param  int defaultOption                             Is the choice used when the player cancels 
+*                                                        (or 0 if the player can't cancel or -1 to don't choice any)
+* @return {type} {description}
+*/
+  choice(text, options, defaultOption){
     this.game.eventQueue.push({
       func: ()=>{
-        let c = new Choice(this.game, 0, 0, text, options, this.scope);
+        let c = new Choice(this.game, 0, 0, text, options, defaultOption, this.scope);
         this.game.setCgo(c);
       },
       scope: this.scope

@@ -2,7 +2,7 @@ import CONFIG from '../config';
 import Message from './Message';
 
 class Choice extends Phaser.Group{
-  constructor(game, x, y, text, options, optionsCtx){
+  constructor(game, x, y, text, options, defaultOption, optionsCtx){
     super(game);
     var windowSkin = new Phaser.NinePatchImage(this.game, x, y, 'choice_1');
     windowSkin.targetWidth = 48;
@@ -34,6 +34,8 @@ class Choice extends Phaser.Group{
     this.selarrow.x = this.options[this.optionsIndex].x - 2;
     this.selarrow.y = this.options[this.optionsIndex].y + 2; 
 
+    this.defaultOption = defaultOption;
+
     this.message = new Message(this.game, text, true);
     this.add(this.message);
     this.add(this.menu);
@@ -42,7 +44,6 @@ class Choice extends Phaser.Group{
   }
 
   onkeyup(key){
-    console.log(this.message.alive)
     if(this.message.alive){
       this.message.onkeyup(key);
       this.menu.visible = true;
@@ -68,6 +69,21 @@ class Choice extends Phaser.Group{
       this.options[this.optionsIndex].action.apply(this.optionsCtx);
       this.game.eventEndSignal.dispatch();
       this.destroy();
+    }
+    
+    // Select the deafult option based on this.defaultOption    
+    // (or 0 if the player can't cancel or -1 to don't choice any)
+    // this.defaultOption is in length language and dont in array index language
+    if(key == Phaser.Keyboard.Z){
+      console.log(this.defaultOption)
+      if(this.defaultOption != 0 && this.defaultOption != -1){
+        this.options[this.defaultOption - 1 ].action.apply(this.optionsCtx);
+        this.game.eventEndSignal.dispatch();
+        this.destroy();
+      }else if(this.defaultOption == -1){
+        this.game.eventEndSignal.dispatch();
+        this.destroy();
+      }
     }
   }
 
