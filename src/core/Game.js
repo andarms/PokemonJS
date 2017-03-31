@@ -1,7 +1,8 @@
-import CONFIG from './config';
+import CONFIG    from './config';
 import Bootstrap from './States/Bootstrap';
-import Intro from './States/Intro';
-import Preload from './States/Preload';
+import Intro     from './States/Intro';
+import Overworld from './States/Overworld';
+import Preload   from './States/Preload';
 
 class Game extends Phaser.Game{
   constructor(){
@@ -9,6 +10,7 @@ class Game extends Phaser.Game{
 
     this.state.add('Bootstrap', Bootstrap);
     this.state.add('Intro', Intro);
+    this.state.add('Overworld', Overworld);
     this.state.add('Preload', Preload);
 
     // alias to the current game object that has control of the keyboard

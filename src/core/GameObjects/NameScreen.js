@@ -35,11 +35,14 @@ class NameScreen extends Phaser.Group{
 
   }
 
+  onkeydown(){}
   onkeyup(key){
     if(key == Phaser.Keyboard.ENTER){
       this.object.name = this.input.value;
       this.game.eventEndSignal.dispatch();
       this.input.destroy();
+      this.object.animations.stop();
+      this.object.frame = 0;
       this.remove(this.object);
       this.destroy();
     }

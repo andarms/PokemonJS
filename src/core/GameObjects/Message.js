@@ -11,7 +11,7 @@ class Message extends Phaser.Group{
     this.roof = y;
 
     // set the messagebox at the top when overloap the player.
-    if(this.game.player && y - this.game.player.y < 64) y = this.game.camera.view.y;
+    if(DATA.player && y - DATA.player.y < 64) y = this.game.camera.view.y;
     
     var windowSkin = new Phaser.NinePatchImage(this.game, x, y, 'speech_hgss_1');
     windowSkin.targetWidth = 512;
@@ -25,11 +25,12 @@ class Message extends Phaser.Group{
     this.line2 =  this.game.add.text(x+paddingLeft, y+paddingTop+40, "", CONFIG.FONT_STYLE);
     
     this.keep = keep || false;
-    // this.game.player.lock()
+    // DATA.player.lock()
     // this.game.GFX.select.play();
 
     this.addMultiple([windowSkin, this.line1, this.line2])
     this.showNextLine()
+    this.game.add.existing(this);
   }
 
   generateLines(text){
@@ -109,7 +110,7 @@ class Message extends Phaser.Group{
     return text;
   }
 
-
+  onkeydown(){}
   onkeyup(key){
     if(key == Phaser.Keyboard.X || key == Phaser.Keyboard.Z || key == Phaser.Keyboard.ENTER){
       this.showNextLine();

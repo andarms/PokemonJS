@@ -1,6 +1,7 @@
 const CONFIG = {
   WIDTH: 512,
   HEIGTH: 384,
+  TILE_SIZE: 32,
   KEYBAORD_CONTROLS: [
       Phaser.Keyboard.Z, 
       Phaser.Keyboard.X, 

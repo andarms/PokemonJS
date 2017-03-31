@@ -90,17 +90,27 @@ class Pkmn{
     });    
   }
 
-  end(){
-    this.game.eventEndSignal.dispatch();
+  start(scope){
+    this.scope = scope;
   }
 
   continue(){
     this.game.eventEndSignal.dispatch();
   }
 
-  start(scope){
-    this.scope = scope;
+  end(){
+    this.game.eventEndSignal.dispatch();
   }
+
+  release(obj){
+    this.game.eventQueue.push({
+      func: ()=>{
+        this.game.setCgo(obj);
+      },
+      scope: this
+    });    
+  }
+
 }
 
 export default Pkmn;

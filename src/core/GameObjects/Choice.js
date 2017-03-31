@@ -50,6 +50,7 @@ class Choice extends Phaser.Group{
 
   }
 
+  onkeydown(){}
   onkeyup(key){
     if(!this.alive) return;
     if(this.message.alive){

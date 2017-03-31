@@ -70,14 +70,18 @@ class Intro extends Phaser.State{
   }
 
   confirmNaming(){
-    PKMN.confirm('So your name is [PLAYER].', this.statAventure, this.naming);
+    PKMN.confirm('So your name is [PLAYER].', this.wellcome, this.naming);
+    PKMN.continue();
+  }
+
+  wellcome(){
+    PKMN.msgbox("Your very own POKéMON legend is about to unfold!");
+    PKMN.msgbox("A world of dreams and adventures with POKéMON awaits! Let’s go!", this.statAventure);
     PKMN.continue();
   }
 
   statAventure(){
-    PKMN.msgbox("Your very own POKéMON legend is about to unfold!");
-    PKMN.msgbox("A world of dreams and adventures with POKéMON awaits! Let’s go!");
-    PKMN.continue();
+    this.state.start('Overworld');
   }
 
 }
