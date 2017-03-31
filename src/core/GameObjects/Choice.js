@@ -6,13 +6,16 @@ import Message from './Message';
 class Choice extends Phaser.Group{
   constructor(game, x, y, text, flag, options, defaultOption, optionsCtx){
     super(game);
+    
+    this.menu = new Phaser.Group(game);    
+    this.message = new Message(this.game, text, true);
+    this.add(this.message);
+
     var windowSkin = new Phaser.NinePatchImage(this.game, x, y, 'choice_1');
     windowSkin.targetWidth = 48;
     windowSkin.targetHeight = 32;
-    
-    this.menu = new Phaser.Group(game);    
     this.menu.add(windowSkin);
-    
+
     this.selarrow = this.menu.add(this.game.add.sprite(x, y, 'selarrow'));
     this.selarrow.anchor.set(1, 0);
 
@@ -30,6 +33,9 @@ class Choice extends Phaser.Group{
     }
     windowSkin.targetWidth += maxLength*16
 
+    this.menu.x = game.world.width - windowSkin.targetWidth;
+    this.menu.y = this.message.roof - windowSkin.targetHeight;
+
     this.options = options;
     this.optionsCtx = optionsCtx;
     this.optionsIndex = 0;
@@ -39,8 +45,6 @@ class Choice extends Phaser.Group{
     this.defaultOption = defaultOption;
     this.flag = flag;
 
-    this.message = new Message(this.game, text, true);
-    this.add(this.message);
     this.add(this.menu);
     this.menu.visible = false;
 

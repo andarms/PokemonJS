@@ -1,5 +1,5 @@
 import {PKMN} from '../main';
-import DATA from '../Data';
+import DATA   from '../Data';
 import Player from '../GameObjects/Player';
 
 class Intro extends Phaser.State{
@@ -14,7 +14,6 @@ class Intro extends Phaser.State{
     PKMN.msgbox("My name is Oak.[/p]People affectionately refer to me as the Pokémon Professor.");
     PKMN.msgbox("This world…", this.intro1);
     PKMN.end();
-
   }
 
   intro1(){
@@ -78,6 +77,7 @@ class Intro extends Phaser.State{
   statAventure(){
     PKMN.msgbox("Your very own POKéMON legend is about to unfold!");
     PKMN.msgbox("A world of dreams and adventures with POKéMON awaits! Let’s go!");
+    PKMN.continue();
   }
 
 }
