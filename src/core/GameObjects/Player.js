@@ -20,6 +20,7 @@ class Player extends Phaser.Sprite{
     this.direction = 'down';
     this.gender = gender;
     this.moving = false;
+    this.changedTile = true;
     this.speed = 1;
     this.animationSpeed = 8;
     this.currentTile = {x:0, y:0};
@@ -67,7 +68,48 @@ class Player extends Phaser.Sprite{
     this.currentTile.y = y;
   }
 
-  update(){
+  setCollisions(collisions){
+    this.collisions = collisions;
+  }
+
+  update(){  
+
+    // Check for collisions
+    let vector = DIR_VERTORS[this.direction];
+    if(this.moving && this.changedTile){
+      let nextX = this.currentTile.x + vector[0];          
+      let nextY = this.currentTile.y + vector[1];
+      // Keep the player in the wolrd bounds
+      if(nextX < 0 || nextY < 0 || nextY > this.collisions.layer.data.length-1 || nextX > this.collisions.layer.data[0].length-1){
+        this.moving = false;
+      }else{
+        let nextTile = this.collisions.layer.data[nextY][nextX];
+        if(nextTile.properties.collide){
+            this.moving = false;
+            this.targetX = this.currentTile.x * CONFIG.TILE_SIZE;
+            this.targetY = this.currentTile.y * CONFIG.TILE_SIZE;
+            // pLay collision sound
+        }else{
+          this.currentTile = nextTile;
+          this.changedTile = false;          
+        }
+      }
+    }
+
+    if(this.moving){
+      this.animations.play(this.direction);
+      this.body.x += vector[0] * this.speed;
+      this.body.y += vector[1] * this.speed;
+    }
+
+    if(this.targetX == this.body.x && this.targetY == this.body.y){
+      this.moving = false;
+      this.changedTile = true;
+      this.animations.stop();
+      this.frame = this.idleFrames[this.direction];
+    }
+
+
     if(!this.moving && this.game.cgo == this){
       if(this.game.input.keyboard.isDown(Phaser.Keyboard.UP)){
         this.targetY -= CONFIG.TILE_SIZE;
@@ -89,25 +131,6 @@ class Player extends Phaser.Sprite{
         this.direction = "right";
         this.moving = true;
       }
-    }
-
-    // Check for collisions
-    let vector = DIR_VERTORS[this.direction];
-    if(this.moving){
-      this.currentTile.x += vector[0];
-      this.currentTile.y += vector[1];
-    }
-
-    if(this.moving){
-      this.animations.play(this.direction);
-      this.body.x += vector[0] * this.speed;
-      this.body.y += vector[1] * this.speed;
-    }
-
-    if(this.targetX == this.body.x && this.targetY == this.body.y){
-      this.moving = false;
-      this.animations.stop();
-      this.frame = this.idleFrames[this.direction]
     }
   }
 
