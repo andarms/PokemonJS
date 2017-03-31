@@ -4,6 +4,7 @@ const DATA = {
     map: 'Pallet_Town/pallet_town_01',
     x: 8,
     y: 10
-  }
+  },
+  map: {}
 }
 export default DATA;

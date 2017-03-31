@@ -52,8 +52,8 @@
                  "type":"Warp",
                  "visible":true,
                  "width":32,
-                 "x":320,
-                 "y":320
+                 "x":576,
+                 "y":0
                 }, 
                 {
                  "height":32,
@@ -359,6 +359,36 @@
                  "width":32,
                  "x":320,
                  "y":512
+                }, 
+                {
+                 "height":32,
+                 "id":140,
+                 "name":"",
+                 "properties":
+                    {
+                     "name":"test"
+                    },
+                 "rotation":0,
+                 "type":"Script",
+                 "visible":true,
+                 "width":32,
+                 "x":288,
+                 "y":320
+                }, 
+                {
+                 "height":32,
+                 "id":144,
+                 "name":"",
+                 "properties":
+                    {
+                     "name":"test2"
+                    },
+                 "rotation":0,
+                 "type":"ActionScript",
+                 "visible":true,
+                 "width":32,
+                 "x":224,
+                 "y":512
                 }],
          "opacity":0.899999976158142,
          "type":"objectgroup",
@@ -378,7 +408,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":140,
+ "nextobjectid":145,
  "orientation":"orthogonal",
  "properties":
     {

@@ -1,10 +1,19 @@
-import Choice from './GameObjects/Choice';
-import Message from './GameObjects/Message';
+import DATA               from './Data';
+import Choice             from './GameObjects/Choice';
+import Message            from './GameObjects/Message';
 import {PlayerNameScreen} from './GameObjects/NameScreen';
 
 class Pkmn{
   constructor(game){
     this.game = game;
+  }
+
+  setFlag(flag, value){ 
+    if(value){
+      DATA.FLAGS[flag] = value;
+    }else{
+      DATA.FLAGS[flag] = true;
+    }
   }
 
   msgbox(text, callback){
@@ -102,10 +111,10 @@ class Pkmn{
     this.game.eventEndSignal.dispatch();
   }
 
-  release(obj){
+  release(){
     this.game.eventQueue.push({
       func: ()=>{
-        this.game.setCgo(obj);
+        this.game.setCgo(DATA.player);
       },
       scope: this
     });    
