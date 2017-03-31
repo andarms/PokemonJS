@@ -66,9 +66,18 @@ class Intro extends Phaser.State{
 
   naming(){
     PKMN.playername();
-    PKMN.msgbox('Right… ');
-    PKMN.msgbox('So your name is [PLAYER].');
+    PKMN.msgbox('Right… ', this.confirmNaming);
     PKMN.continue();
+  }
+
+  confirmNaming(){
+    PKMN.confirm('So your name is [PLAYER].', this.statAventure, this.naming);
+    PKMN.continue();
+  }
+
+  statAventure(){
+    PKMN.msgbox("Your very own POKéMON legend is about to unfold!");
+    PKMN.msgbox("A world of dreams and adventures with POKéMON awaits! Let’s go!");
   }
 
 }

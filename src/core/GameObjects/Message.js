@@ -1,4 +1,5 @@
 import CONFIG from '../config';
+import DATA from '../Data';
 
 class Message extends Phaser.Group{
   constructor(game, text, keep){
@@ -14,7 +15,7 @@ class Message extends Phaser.Group{
     var windowSkin = new Phaser.NinePatchImage(this.game, x, y, 'speech_hgss_1');
     windowSkin.targetWidth = 512;
     windowSkin.targetHeight = 96;
-
+    text = this.format(text);
     this.paragraphs = this.generateLines(text);
     this.paragraphsIndex = 0;
     this.linesIndex = 0;
@@ -98,11 +99,13 @@ class Message extends Phaser.Group{
       this.linesIndex = 0;
       this.paragraphsIndex++;
     }
-    this.formatMessage()
   }
 
-  formatMessage(){
-    this.line1.text = this.line1.text.replace("[player]", "PLAYERNAME")
+  format(text){
+    if(DATA.player){
+      text = text.replace("[PLAYER]", DATA.player.name);
+    }
+    return text;
   }
 
 

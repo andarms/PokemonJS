@@ -40,6 +40,7 @@ class NameScreen extends Phaser.Group{
       this.object.name = this.input.value;
       this.game.eventEndSignal.dispatch();
       this.input.destroy();
+      this.remove(this.object);
       this.destroy();
     }
   }

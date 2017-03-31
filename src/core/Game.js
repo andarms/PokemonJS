@@ -22,6 +22,7 @@ class Game extends Phaser.Game{
 
   setCgo(gameObject){
     this.cgo = gameObject;
+    console.log(gameObject)
   }
 
   releaseCgo(){

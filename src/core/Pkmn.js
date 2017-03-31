@@ -59,6 +59,26 @@ class Pkmn{
     });
   }
 
+  confirm(text, yes, no){
+    let options = [
+      {text: "YES", action: yes},
+      {text: "NO", action:  no}
+    ];
+    this.game.eventQueue.push({
+      func: ()=>{
+        let c = new Choice(this.game, 0, 0, text, 'lastconfirm', options, 2, this.scope);
+        this.game.setCgo(c);
+      },
+      scope: this.scope
+    });
+    this.game.eventQueue.push({
+      func: ()=>{
+        //Hacky way to manage PKMN.continue
+      },
+      scope: this
+    });
+  }
+
 
   playername(){
     this.game.eventQueue.push({
@@ -66,8 +86,8 @@ class Pkmn{
         let p = new PlayerNameScreen(this.game);
         this.game.setCgo(p);
       },
-      scope: this.scope
-    });
+      scope: this
+    });    
   }
 
   end(){

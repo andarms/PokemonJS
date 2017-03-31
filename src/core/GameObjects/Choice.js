@@ -47,6 +47,7 @@ class Choice extends Phaser.Group{
   }
 
   onkeyup(key){
+    if(!this.alive) return;
     if(this.message.alive){
       this.message.onkeyup(key);
       if(!this.message.alive){
@@ -74,6 +75,7 @@ class Choice extends Phaser.Group{
       DATA.FLAGS[this.flag] = this.options[this.optionsIndex].value != null ? this.options[this.optionsIndex].value :  this.optionsIndex + 1;
       this.options[this.optionsIndex].action.apply(this.optionsCtx);
       this.game.eventEndSignal.dispatch();
+      this.alive = false;
       this.destroy();      
     }
     
@@ -85,10 +87,12 @@ class Choice extends Phaser.Group{
         DATA.FLAGS[this.flag] = this.options[this.defaultOption - 1] != null ? this.options[this.defaultOption - 1].value : this.defaultOption;
         this.options[this.defaultOption - 1 ].action.apply(this.optionsCtx);
         this.game.eventEndSignal.dispatch();
+        this.alive = false;
         this.destroy();
       }else if(this.defaultOption == -1){
         DATA.FLAGS[this.flag] = this.defaultOption;
         this.game.eventEndSignal.dispatch();
+        this.alive = false;
         this.destroy();
       }
     }
