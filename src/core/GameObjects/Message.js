@@ -5,7 +5,7 @@ class Message extends Phaser.Group{
     super(game);
     let y = this.game.camera.view.y + 288
     let x = this.game.camera.view.x
-    let paddingTop = 8;
+    let paddingTop = 10;
     let paddingLeft = 25;
 
     // set the messagebox at the top when overloap the player.

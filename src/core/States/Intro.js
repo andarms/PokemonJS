@@ -61,7 +61,14 @@ class Intro extends Phaser.State{
     this.game.world.remove(this.professor);
     this.playerSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY-30, DATA.player.frontSprite);
     this.playerSprite.anchor.set(.5, .5);
-    PKMN.msgbox("First, what is your name?");
+    PKMN.msgbox("First, what is your name?", this.naming);
+  }
+
+  naming(){
+    PKMN.playername();
+    PKMN.msgbox('Right… ');
+    PKMN.msgbox('So your name is [PLAYER].');
+    PKMN.continue();
   }
 
 }

@@ -1,5 +1,6 @@
 import Choice from './GameObjects/Choice';
 import Message from './GameObjects/Message';
+import {PlayerNameScreen} from './GameObjects/NameScreen';
 
 class Pkmn{
   constructor(game){
@@ -53,6 +54,17 @@ class Pkmn{
       func: ()=>{
         let c = new Choice(this.game, 0, 0, text, flag, options, defaultOption, this.scope);
         this.game.setCgo(c);
+      },
+      scope: this.scope
+    });
+  }
+
+
+  playername(){
+    this.game.eventQueue.push({
+      func: ()=>{
+        let p = new PlayerNameScreen(this.game);
+        this.game.setCgo(p);
       },
       scope: this.scope
     });
