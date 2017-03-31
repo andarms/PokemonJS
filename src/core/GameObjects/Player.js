@@ -82,6 +82,8 @@ class Player extends Phaser.Sprite{
       // Keep the player in the wolrd bounds
       if(nextX < 0 || nextY < 0 || nextY > this.collisions.layer.data.length-1 || nextX > this.collisions.layer.data[0].length-1){
         this.moving = false;
+        this.targetX = this.currentTile.x * CONFIG.TILE_SIZE;
+        this.targetY = this.currentTile.y * CONFIG.TILE_SIZE;        
       }else{
         let nextTile = this.collisions.layer.data[nextY][nextX];
         if(nextTile.properties.collide){
