@@ -4,13 +4,13 @@ import {PKMN} from './main';
 const EVENTS = {
   'test': ()=>{
     PKMN.start(this);
-    PKMN.msgbox("Events now works!");
+    PKMN.msgbox("Triggered Events works!");
     PKMN.release();
     PKMN.end();
   },
   'test2': ()=>{
     PKMN.start(this);
-    PKMN.msgbox("Example of action script");
+    PKMN.msgbox("Example of action Event");
     PKMN.release();
     PKMN.end();
   },

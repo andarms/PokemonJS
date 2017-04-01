@@ -389,6 +389,23 @@
                  "width":32,
                  "x":224,
                  "y":512
+                }, 
+                {
+                 "height":32,
+                 "id":147,
+                 "name":"",
+                 "properties":
+                    {
+                     "map":"Pallet_Town\/pallet_town_02",
+                     "x":"8",
+                     "y":"9"
+                    },
+                 "rotation":0,
+                 "type":"Warp",
+                 "visible":true,
+                 "width":32,
+                 "x":256,
+                 "y":288
                 }],
          "opacity":0.899999976158142,
          "type":"objectgroup",
@@ -408,7 +425,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":145,
+ "nextobjectid":149,
  "orientation":"orthogonal",
  "properties":
     {

@@ -71,6 +71,7 @@ class Player extends Phaser.Sprite{
   }
 
   setMapPosition(x, y){
+    this.moving = false;
     this.x = CONFIG.TILE_SIZE * x;
     this.y = CONFIG.TILE_SIZE * y - 16;
     this.targetX = this.x;
