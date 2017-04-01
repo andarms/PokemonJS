@@ -4,7 +4,7 @@
   "description": "Javascript Pokemon Game",
   "main": "main.js",
   "scripts": {
-    "postinstall": "brunch build --optimize"
+    "postinstall": "brunch build -P"
   },
   "dependencies": {
     "phaser-ce": "^2.7.1",
