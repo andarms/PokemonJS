@@ -2,6 +2,10 @@ import CONFIG from '../config';
 
 
 class Bootstrap extends Phaser.State{
+  preload(){
+    this.game.load.image('loading', 'Resources/Graphics/Pictures/loading.png')
+  }
+  
   create(){
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.stage.smoothed = false;

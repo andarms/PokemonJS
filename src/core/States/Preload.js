@@ -2,6 +2,13 @@ import CONFIG from '../config';
 
 class Preload extends Phaser.State{
   preload() {
+    let style = { font: "32px power_clearregular", fill: "#fff"}
+    this.loading = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading...", style);
+    this.loading.anchor.set(.5, .5);
+    this.bar = this.game.add.sprite(16, this.game.world.centerY + 50,"loading");
+    this.load.setPreloadSprite(this.bar);
+
+
     // Trainers Sprites and Animated Tiles
     this.game.load.spritesheet('trchar000', 'Resources/Graphics/Characters/trchar000.png', 32, 48)
     this.game.load.spritesheet('trchar001', 'Resources/Graphics/Characters/trchar001.png', 32, 48)
@@ -81,13 +88,7 @@ class Preload extends Phaser.State{
 
   }
 
-  loadRender() {
-    let style = { font: "40px power_clearregular", fill: "#fff"}
-    let t = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading...", style);
-    t.anchor.set(.5, .5);
-  }
-
-  create() {
+  create2() {
     this.game.add.plugin(PhaserInput.Plugin);
     
     //Windows skins
