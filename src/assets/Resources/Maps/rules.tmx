@@ -6,8 +6,8 @@
  <tileset firstgid="4017" name="movement_permissions" tilewidth="32" tileheight="32" tilecount="24" columns="12">
   <image source="../Graphics/Tilesets/movement_permissions.png" width="384" height="64"/>
  </tileset>
- <tileset firstgid="4041" name="Interior general" tilewidth="32" tileheight="32" tilecount="2008" columns="8">
-  <image source="../Graphics/Tilesets/Interior general.PNG" width="256" height="8032"/>
+ <tileset firstgid="4041" name="interior_general" tilewidth="32" tileheight="32" tilecount="2008" columns="8">
+  <image source="../Graphics/Tilesets/interior_general.PNG" width="256" height="8032"/>
  </tileset>
  <layer name="regions" width="20" height="15">
   <data encoding="csv">

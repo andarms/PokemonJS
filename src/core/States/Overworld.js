@@ -20,7 +20,7 @@ class Overwolrd extends Phaser.State{
     this.map = this.game.add.tilemap(this.mapFilename, 32, 32);
     this.game.map = this.map;
     this.map.addTilesetImage('Outside', 'Outside');
-    this.map.addTilesetImage('Interior general', 'Interior general');
+    this.map.addTilesetImage('interior_general', 'interior_general');
     this.map.addTilesetImage('movement_permissions', 'movement_permissions');
 
     this.collisions = this.map.createLayer('Collisions');

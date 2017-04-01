@@ -478,11 +478,11 @@
         {
          "columns":8,
          "firstgid":4041,
-         "image":"..\/..\/Graphics\/Tilesets\/Interior general.PNG",
+         "image":"..\/..\/Graphics\/Tilesets\/interior_general.PNG",
          "imageheight":8032,
          "imagewidth":256,
          "margin":0,
-         "name":"Interior general",
+         "name":"interior_general",
          "properties":
             {
 

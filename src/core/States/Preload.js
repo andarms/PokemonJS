@@ -22,7 +22,7 @@ class Preload extends Phaser.State{
     this.game.load.image('battlebgField', 'Resources/Graphics/Battlebacks/battlebgField.png')
     this.game.load.image('playerbaseCityGrass', 'Resources/Graphics/Battlebacks/playerbaseCityGrass.png')
     this.game.load.image('enemybaseCityGrass', 'Resources/Graphics/Battlebacks/enemybaseCityGrass.png')
-    this.game.load.image('Interior general', 'Resources/Graphics/Tilesets/Interior general.png')
+    this.game.load.image('interior_general', 'Resources/Graphics/Tilesets/interior_general.png')
     this.game.load.image('movement_permissions', 'Resources/Graphics/Tilesets/movement_permissions.png')
 
     // General Pictures
