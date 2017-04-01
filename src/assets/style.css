@@ -15,6 +15,7 @@ body {
   margin: 0px;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: #37474F;
   image-rendering: optimizeSpeed;
   image-rendering: -moz-crisp-edges;
@@ -31,4 +32,16 @@ canvas{
   image-rendering: -webkit-optimize-contrast;
   image-rendering: optimize-contrast;
   -ms-interpolation-mode: nearest-neighbor;
+}
+
+
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}
+@keyframes octocat-wave{
+  0%,100%{transform:rotate(0)}
+  20%,60%{transform:rotate(-25deg)}
+  40%,80%{transform:rotate(10deg)}
+}
+@media (max-width:500px){
+  .github-corner:hover .octo-arm{animation:none}
+  .github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}
 }
