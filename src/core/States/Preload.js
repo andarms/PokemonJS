@@ -81,6 +81,7 @@ class Preload extends Phaser.State{
     
     
     this.game.load.audio('title_origin', 'Resources/Audio/BGM/title_origin.ogg')
+    this.game.load.audio('begin', 'Resources/Audio/BGM/begin.ogg')
     this.game.load.audio('select', 'Resources/Audio/BGS/select.ogg')
     this.game.load.audio('Choose', 'Resources/Audio/BGS/Choose.ogg')
 

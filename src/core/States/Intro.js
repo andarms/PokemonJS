@@ -5,9 +5,11 @@ import Player from '../GameObjects/Player';
 class Intro extends Phaser.State{
   create(){
     this.game.add.sprite(0, 0, 'introbg');
-    
     this.professor = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY-30, 'introOak');
     this.professor.anchor.set(.5, .5);
+
+    this.theme = this.game.add.audio('begin');
+    this.theme.loopFull();
 
     PKMN.start(this);
     PKMN.msgbox("Hello, there![/n]Glad to meet you![/p]Welcome to the world of Pokémon!");
@@ -81,7 +83,10 @@ class Intro extends Phaser.State{
   }
 
   statAventure(){
-    this.state.start('Overworld', true, false, DATA.start.map, DATA.start.x, DATA.start.y);
+    this.theme.fadeOut(500)
+    this.theme.onFadeComplete.add(() =>{
+      this.state.start('Overworld', true, false, DATA.start.map, DATA.start.x, DATA.start.y);
+    }, this, 0);
   }
 
 }
