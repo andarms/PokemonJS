@@ -24,7 +24,7 @@ class Preload extends Phaser.State{
     this.game.load.image('battlebgField', 'Resources/Graphics/Battlebacks/battlebgField.png')
     this.game.load.image('playerbaseCityGrass', 'Resources/Graphics/Battlebacks/playerbaseCityGrass.png')
     this.game.load.image('enemybaseCityGrass', 'Resources/Graphics/Battlebacks/enemybaseCityGrass.png')
-    this.game.load.image('interior_general', 'Resources/Graphics/Tilesets/interior_general.png')
+    this.game.load.image('interior_general', 'Resources/Graphics/Tilesets/Interior_general.png')
     this.game.load.image('movement_permissions', 'Resources/Graphics/Tilesets/movement_permissions.png')
 
     // General Pictures
@@ -71,8 +71,8 @@ class Preload extends Phaser.State{
     
     
     this.game.load.audio('title_origin', 'Resources/Audio/BGM/title_origin.ogg')
-    this.game.load.audio('select', 'Resources/Audio/BGS/select.wav')
-    this.game.load.audio('Choose', 'Resources/Audio/BGS/Choose.wav')
+    this.game.load.audio('select', 'Resources/Audio/BGS/select.ogg')
+    this.game.load.audio('Choose', 'Resources/Audio/BGS/Choose.ogg')
 
     this.game.load.tilemap('Pallet_Town/pallet_town_01', 'Resources/Maps/Pallet_Town/pallet_town_01.json', null, Phaser.Tilemap.TILED_JSON)
     this.game.load.tilemap('Pallet_Town/pallet_town_02', 'Resources/Maps/Pallet_Town/pallet_town_02.json', null, Phaser.Tilemap.TILED_JSON)    
