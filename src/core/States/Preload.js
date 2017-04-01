@@ -1,4 +1,5 @@
 import CONFIG from '../config';
+import {GFX} from '../main';
 
 class Preload extends Phaser.State{
   preload() {
@@ -91,6 +92,8 @@ class Preload extends Phaser.State{
 
   create() {
     this.game.add.plugin(PhaserInput.Plugin);
+
+    GFX.choose = this.game.add.audio('Choose');
     
     //Windows skins
     this.game.cache.addNinePatch('choice_1', 'choice_1', null, 16, 16, 16, 16)

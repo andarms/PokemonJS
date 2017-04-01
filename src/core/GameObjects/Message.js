@@ -1,5 +1,6 @@
 import CONFIG from '../config';
-import DATA from '../Data';
+import DATA   from '../Data';
+import {GFX}  from '../main';
 
 class Message extends Phaser.Group{
   constructor(game, text, keep){
@@ -87,7 +88,7 @@ class Message extends Phaser.Group{
         }
         return;
     }
-    // this.game.GFX.select.play();
+    GFX.choose.play();
     this.line1.text = this.paragraphs[this.paragraphsIndex][this.linesIndex];
     this.line2.text = "";
     this.linesIndex++;
