@@ -88,7 +88,7 @@ class Preload extends Phaser.State{
 
   }
 
-  create2() {
+  create() {
     this.game.add.plugin(PhaserInput.Plugin);
     
     //Windows skins
