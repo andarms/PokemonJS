@@ -14,5 +14,11 @@ const EVENTS = {
     PKMN.release();
     PKMN.end();
   },
+  'playerhouse':()=>{
+    PKMN.start(this);
+    PKMN.msgbox("[PLAYER]'s house");
+    PKMN.release();
+    PKMN.end();
+  },
 }
 export default EVENTS;

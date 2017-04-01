@@ -406,6 +406,21 @@
                  "width":32,
                  "x":256,
                  "y":288
+                }, 
+                {
+                 "height":32,
+                 "id":149,
+                 "name":"",
+                 "properties":
+                    {
+                     "name":"playerhouse"
+                    },
+                 "rotation":0,
+                 "type":"ActionScript",
+                 "visible":true,
+                 "width":32,
+                 "x":192,
+                 "y":288
                 }],
          "opacity":0.899999976158142,
          "type":"objectgroup",
@@ -425,7 +440,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":149,
+ "nextobjectid":150,
  "orientation":"orthogonal",
  "properties":
     {

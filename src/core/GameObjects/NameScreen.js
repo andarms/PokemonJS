@@ -39,6 +39,9 @@ class NameScreen extends Phaser.Group{
   onkeyup(key){
     if(key == Phaser.Keyboard.ENTER){
       this.object.name = this.input.value;
+      if (this.object.name.trim() == ""){
+        this.getDefaultName()
+      }
       this.game.eventEndSignal.dispatch();
       this.input.destroy();
       this.object.animations.stop();
@@ -62,5 +65,9 @@ export class PlayerNameScreen extends NameScreen{
     this.object.x = this.x+32;
     this.object.y = this.y+24;
     this.object.animations.play('down');
+  }
+
+  getDefaultName(){
+    this.object.name = DATA.defaultName[DATA.player.gender];
   }
 }
