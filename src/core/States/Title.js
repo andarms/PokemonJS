@@ -7,7 +7,7 @@ class Title extends Phaser.State {
     this.step = 0;
 
     this.theme = this.game.add.audio('title_origin');
-    this.theme.play();
+    this.theme.loopFull();
 
     this.masks = {};
     this.pokelogoIntro = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'custom_pokelogo_shine');
