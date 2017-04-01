@@ -81,7 +81,7 @@ class Intro extends Phaser.State{
   }
 
   statAventure(){
-    this.state.start('Overworld');
+    this.state.start('Overworld', true, false, DATA.start.map, DATA.start.x, DATA.start.y);
   }
 
 }

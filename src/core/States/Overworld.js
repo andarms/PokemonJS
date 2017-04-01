@@ -3,15 +3,21 @@ import * as utils from '../utils';
 
 class Overwolrd extends Phaser.State{
 
+  init(mapFilename, tileX, tileY){
+    this.mapFilename = mapFilename;
+    this.tileX = parseInt(tileX);
+    this.tileY = parseInt(tileY);
+  }
+
   create(){
     this.player = DATA.player;
     this.game.setCgo(this.player);
     this.createmap();
-    this.player.setMapPosition(DATA.start.x, DATA.start.y);
+    this.player.setMapPosition(this.tileX, this.tileY);
   }
 
   createmap(){
-    this.map = this.game.add.tilemap(DATA.start.map, 32, 32);
+    this.map = this.game.add.tilemap(this.mapFilename, 32, 32);
     this.game.map = this.map;
     this.map.addTilesetImage('Outside', 'Outside');
     this.map.addTilesetImage('Interior general', 'Interior general');
@@ -20,20 +26,37 @@ class Overwolrd extends Phaser.State{
     this.collisions = this.map.createLayer('Collisions');
     this.map.createLayer('1');
     this.map.createLayer('2');
+    
+
+    this.collisions.resizeWorld();
+    this.game.camera.follow(this.player);
+    DATA.map.collisions = this.collisions;
+
+
+    let animatedTiles = utils.findObjectsByType('AnimatedTile', this.map, 'Events', true)
+    let animatedGroup = this.game.add.group()
+    for(var tile of animatedTiles){
+      animatedGroup.create(tile.x, tile.y, tile.properties.sprite)
+      animatedGroup.callAll(
+        'animations.add', 
+        'animations', 
+        'initial', 
+        utils.range(parseInt(tile.properties.frames)), 
+        parseInt(tile.properties.fps), 
+        true);
+      animatedGroup.callAll('animations.play', 'animations', 'initial');
+    }
+
+
     this.game.world.add(this.player);
     this.map.createLayer('3');
 
-    this.collisions.resizeWorld();
-    this.player.setCollisions(this.collisions);
-    this.game.camera.follow(this.player);
-
     // Automatics script, no action button needed
-    DATA.map.script = new Phaser.Group(this.game);
-    DATA.map.script.enableBody = true;
-    let scriptsTiles = utils.findObjectsByType('Script', this.map, 'Events');    
-    for(var i of scriptsTiles){
-      let s = DATA.map.script.add(this.game.add.sprite(i.x, i.y));
-      console.log(i.x, i.y, s.width)      
+    DATA.map.triggerscripts = new Phaser.Group(this.game);
+    DATA.map.triggerscripts.enableBody = true;
+    let triggerscripts = utils.findObjectsByType('TriggerScript', this.map, 'Events');    
+    for(var i of triggerscripts){
+      let s = DATA.map.triggerscripts.add(this.game.add.sprite(i.x, i.y));    
       s.properties = i.properties;
     }
 
@@ -46,6 +69,19 @@ class Overwolrd extends Phaser.State{
       s.properties = i.properties;
     }
 
+
+    DATA.map.warps = new Phaser.Group(this.game);
+    DATA.map.warps.enableBody = true;
+    let warps = utils.findObjectsByType('Warp', this.map, 'Events');    
+    for(var i of warps){
+      let s = DATA.map.warps.add(this.game.add.sprite(i.x, i.y));    
+      s.properties = i.properties;
+    }
+
+  }
+
+  shutdown(){
+    this.world.remove(this.player);
   }
 
 }

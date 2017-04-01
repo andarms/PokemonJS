@@ -80,7 +80,7 @@ class Player extends Phaser.Sprite{
   }
 
   setCollisions(collisions){
-    this.collisions = collisions;
+    DATA.map.collisions = collisions;
   }
 
   runScript(player, tile){    
@@ -100,6 +100,10 @@ class Player extends Phaser.Sprite{
     }
   }
 
+  teleport(player, warp){
+    this.game.state.restart(true, false, warp.properties.map, warp.properties.x, warp.properties.y)
+  }
+
   update(){  
     // Check for collisions
     let vector = DIR_VECTORS[this.direction];
@@ -107,13 +111,13 @@ class Player extends Phaser.Sprite{
       let nextX = this.currentTile.x + vector[0];          
       let nextY = this.currentTile.y + vector[1];
       // Keep the player in the wolrd bounds
-      if(nextX < 0 || nextY < 0 || nextY > this.collisions.layer.data.length-1 || nextX > this.collisions.layer.data[0].length-1){
+      if(nextX < 0 || nextY < 0 || nextY > DATA.map.collisions.layer.data.length-1 || nextX > DATA.map.collisions.layer.data[0].length-1){
         this.moving = false;
         this.targetX = this.currentTile.x * CONFIG.TILE_SIZE;
         this.targetY = this.currentTile.y * CONFIG.TILE_SIZE;
         this.frame = this.idleFrames[this.direction];
       }else{
-        let nextTile = this.collisions.layer.data[nextY][nextX];
+        let nextTile = DATA.map.collisions.layer.data[nextY][nextX];
         if(nextTile.properties.collide){
             this.moving = false;
             this.targetX = this.currentTile.x * CONFIG.TILE_SIZE;
@@ -121,7 +125,8 @@ class Player extends Phaser.Sprite{
             this.frame = this.idleFrames[this.direction];
             // pLay collision sound
         }else{
-          this.currentTile = nextTile;
+          this.currentTile.x = nextX;
+          this.currentTile.y = nextY;
           this.changedTile = false;          
         }
       }
@@ -138,7 +143,8 @@ class Player extends Phaser.Sprite{
       this.animations.stop();
       this.frame = this.idleFrames[this.direction];
       this.changedTile = true;
-      this.game.physics.arcade.overlap(this, DATA.map.script, this.runScript, null, this);
+      this.game.physics.arcade.overlap(this, DATA.map.triggerscripts, this.runScript, null, this);
+      this.game.physics.arcade.overlap(this, DATA.map.warps, this.teleport, null, this);
     }
 
 

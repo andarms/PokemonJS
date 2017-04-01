@@ -369,7 +369,7 @@
                      "name":"test"
                     },
                  "rotation":0,
-                 "type":"Script",
+                 "type":"TriggerScript",
                  "visible":true,
                  "width":32,
                  "x":288,
