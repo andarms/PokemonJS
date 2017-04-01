@@ -1062,6 +1062,7 @@
  "orientation":"orthogonal",
  "properties":
     {
+     "bgm":"route",
      "name":"Route 1"
     },
  "renderorder":"right-down",

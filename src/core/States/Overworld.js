@@ -14,11 +14,16 @@ class Overwolrd extends Phaser.State{
     this.game.setCgo(this.player);
     this.createmap();
     this.player.setMapPosition(this.tileX, this.tileY);
+
+    if(this.map.properties.bgm){
+      this.bgm = this.game.add.audio(this.map.properties.bgm);
+      this.bgm.loopFull();
+    }
   }
 
   createmap(){
     this.map = this.game.add.tilemap(this.mapFilename, 32, 32);
-    this.game.map = this.map;
+    console.log(this.map.properties)
     this.map.addTilesetImage('Outside', 'Outside');
     this.map.addTilesetImage('interior_general', 'interior_general');
     this.map.addTilesetImage('movement_permissions', 'movement_permissions');
@@ -82,6 +87,7 @@ class Overwolrd extends Phaser.State{
 
   shutdown(){
     this.world.remove(this.player);
+    this.bgm.stop();
   }
 
 }

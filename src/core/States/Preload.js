@@ -80,10 +80,12 @@ class Preload extends Phaser.State{
     
     
     
-    this.game.load.audio('title_origin', 'Resources/Audio/BGM/title_origin.ogg')
-    this.game.load.audio('begin', 'Resources/Audio/BGM/begin.ogg')
-    this.game.load.audio('select', 'Resources/Audio/BGS/select.ogg')
-    this.game.load.audio('Choose', 'Resources/Audio/BGS/Choose.ogg')
+    this.game.load.audio('title_origin', 'Resources/Audio/BGM/title_origin.ogg');
+    this.game.load.audio('begin', 'Resources/Audio/BGM/begin.ogg');
+    this.game.load.audio('021-Field04', 'Resources/Audio/BGM/021-Field04.ogg');
+    this.game.load.audio('route', 'Resources/Audio/BGM/route.ogg');
+    this.game.load.audio('select', 'Resources/Audio/BGS/select.ogg');
+    this.game.load.audio('Choose', 'Resources/Audio/BGS/Choose.ogg');
 
     this.game.load.tilemap('Pallet_Town/pallet_town_01', 'Resources/Maps/Pallet_Town/pallet_town_01.json', null, Phaser.Tilemap.TILED_JSON)
     this.game.load.tilemap('Pallet_Town/pallet_town_02', 'Resources/Maps/Pallet_Town/pallet_town_02.json', null, Phaser.Tilemap.TILED_JSON)    

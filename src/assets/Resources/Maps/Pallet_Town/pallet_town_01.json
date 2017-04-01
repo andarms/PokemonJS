@@ -444,7 +444,7 @@
  "orientation":"orthogonal",
  "properties":
     {
-
+     "bgm":"021-Field04"
     },
  "renderorder":"right-down",
  "tileheight":32,
