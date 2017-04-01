@@ -1,3 +1,5 @@
+import CONFIG from '../config';
+
 class Preload extends Phaser.State{
   preload() {
     // Trainers Sprites and Animated Tiles
@@ -77,6 +79,11 @@ class Preload extends Phaser.State{
     this.game.load.tilemap('Route_1/route_1', 'Resources/Maps/Route_1/route_1.json', null, Phaser.Tilemap.TILED_JSON)
 
 
+  }
+
+  loadRender() {
+    let t = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading...", CONFIG.FONT_STYLE);
+    t.anchor.set(.5, .5);
   }
 
   create() {
