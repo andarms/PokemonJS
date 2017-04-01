@@ -1,4 +1,5 @@
 import CONFIG from '../config';
+import DATA from '../Data';
 import {GFX} from '../main';
 
 class Preload extends Phaser.State{
@@ -98,8 +99,11 @@ class Preload extends Phaser.State{
     //Windows skins
     this.game.cache.addNinePatch('choice_1', 'choice_1', null, 16, 16, 16, 16)
     this.game.cache.addNinePatch('speech_hgss_1', 'speech_hgss_1', null, 32, 48, 16, 16)    
-    
-    let t = this.state.start('Title');
+    if(DATA.debug.skipTitle){
+      this.state.start('Intro');
+    }else{
+      this.state.start('Title');
+    }
   }
 }
 export default Preload;

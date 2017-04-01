@@ -1,4 +1,6 @@
 import CONFIG from '../config';
+import DATA from '../Data';
+import DebugGUI from '../DebugGUI';
 
 
 class Bootstrap extends Phaser.State{
@@ -23,8 +25,11 @@ class Bootstrap extends Phaser.State{
     // the only thing they should have are the onkeydown and onkeyup methods
     this.game.input.keyboard.addCallbacks(this, this.onkeydown, this.onkeyup);
 
-
     this.game.eventEndSignal.add(this.eventEndListener, this);
+
+
+    let debugPanel = new DebugGUI();
+    debugPanel.setupGUI(DATA.debug);
 
     this.state.start('Preload');
   }
@@ -54,6 +59,11 @@ class Bootstrap extends Phaser.State{
     }else{
       this.game.releaseCgo();
     }
+  }
+
+
+  test(data){
+    console.log(data)
   }
 
 }

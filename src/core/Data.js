@@ -6,6 +6,7 @@ const DATA = {
     x: 8,
     y: 10
   },
-  map: {}
+  map: {},
+  debug: {skipTitle: false}
 }
 export default DATA;

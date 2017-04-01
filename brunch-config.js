@@ -12,6 +12,7 @@ module.exports = {
   },
   npm: {
     static: [
+      'node_modules/dat.gui/build/dat.gui.js',
       'node_modules/phaser-ce/build/phaser.js'
     ]
   },
