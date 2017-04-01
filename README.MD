@@ -1,4 +1,4 @@
-# Pokemon JS
+![Pokemon JS logo](src/assets/Resources/Graphics/Titles/pokemonjs.png)
 
 A third generation Pokemon game written in Javascript using [phaser.io](http://phaser.io/). Inspired by [Pokemon essentials](http://pokemonessentials.wikia.com/wiki/Pok%C3%A9mon_Essentials_Wiki) and this project aims to be another tool alternive to fans to make pokemon fan games. You can se the demo here [https://pkmnjs.herokuapp.com/](https://pkmnjs.herokuapp.com/)
 
