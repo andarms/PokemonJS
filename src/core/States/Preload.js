@@ -13,6 +13,7 @@ class Preload extends Phaser.State{
     this.game.load.spritesheet('trchar000', 'Resources/Graphics/Characters/trchar000.png', 32, 48)
     this.game.load.spritesheet('trchar001', 'Resources/Graphics/Characters/trchar001.png', 32, 48)
     this.game.load.spritesheet('boy_run', 'Resources/Graphics/Characters/boy_run.png', 32, 48)
+    this.game.load.spritesheet('girl_run', 'Resources/Graphics/Characters/girl_run.png', 32, 48)
     this.game.load.spritesheet('doors5', 'Resources/Graphics/Characters/doors5.png', 32, 32)
     this.game.load.spritesheet('Flowers1', 'Resources/Graphics/Autotiles/Flowers1.png', 32, 32)
     this.game.load.spritesheet('WaterCurrentSouth', 'Resources/Graphics/Autotiles/Water current south.png', 32, 32)

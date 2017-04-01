@@ -12,8 +12,12 @@ let DIR_VECTORS = {
 
 class Player extends Phaser.Sprite{
   constructor(game, gender){
-    let sprite = 'trchar00' + gender;
-    super(game, 0, 0, sprite);
+    let spritesheet = 'trchar00' + gender;
+    super(game, 0, 0, spritesheet);
+    
+    this.normalSpritesheet = spritesheet;
+    this.runSpritesheet = gender == 0 ? 'boy_run': 'girl_run';
+    this.textureChanged = false;
 
     this.game.physics.arcade.enable(this);    
 		this.body.collideWorldBounds = true;
@@ -21,6 +25,7 @@ class Player extends Phaser.Sprite{
     
 
     
+    this.oldDirection = '';
     this.direction = 'down';
     this.gender = gender;
     this.moving = false;
@@ -38,10 +43,10 @@ class Player extends Phaser.Sprite{
       this.frontSprite = 'introGirl';
     }
 
-    this.animations.add('down', [0, 1, 2, 3], this.animationSpeed, true);
-		this.animations.add('left', [4, 5, 6, 7], this.animationSpeed, true);
-		this.animations.add('right', [8, 9, 10, 11], this.animationSpeed, true);
-		this.animations.add('up', [12, 13, 14, 15], this.animationSpeed, true);
+    this.animations.add('down', [0, 1, 2, 3], this.animationSpeed);
+		this.animations.add('left', [4, 5, 6, 7], this.animationSpeed);
+		this.animations.add('right', [8, 9, 10, 11], this.animationSpeed);
+		this.animations.add('up', [12, 13, 14, 15], this.animationSpeed);
     this.idleFrames = {
       "down":  0,
       "left":  4,
@@ -56,6 +61,12 @@ class Player extends Phaser.Sprite{
   }
 
   onkeyup(key){
+    if(key == Phaser.Keyboard.Z){
+      this.speed = 1;
+      this.loadTexture(this.normalSpritesheet);
+      this.textureChanged = false;
+    }
+
     if(key == Phaser.Keyboard.ENTER && !this.moving){
       //Open menu;    
     }
@@ -141,7 +152,6 @@ class Player extends Phaser.Sprite{
 
     if(this.targetX == this.body.x && this.targetY == this.body.y && !this.changedTile){
       this.moving = false;
-      this.animations.stop();
       this.frame = this.idleFrames[this.direction];
       this.changedTile = true;
       this.game.physics.arcade.overlap(this, DATA.map.triggerscripts, this.runScript, null, this);
@@ -152,25 +162,42 @@ class Player extends Phaser.Sprite{
     if(!this.moving && this.game.cgo == this){
       if(this.game.input.keyboard.isDown(Phaser.Keyboard.UP)){
         this.targetY -= CONFIG.TILE_SIZE;
+        this.oldDirection = this.direction;
         this.direction = "up";
         this.moving = true;
       }
       else if(this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
         this.targetY += CONFIG.TILE_SIZE;
+        this.oldDirection = this.direction;
         this.direction = "down";
         this.moving = true;
       }
       else if(this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
         this.targetX -= CONFIG.TILE_SIZE;
+        this.oldDirection = this.direction;
         this.direction = "left";
         this.moving = true;
       }
       else if(this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
         this.targetX += CONFIG.TILE_SIZE;
+        this.oldDirection = this.direction;
         this.direction = "right";
         this.moving = true;
       }
+
+      if(this.game.input.keyboard.isDown(Phaser.Keyboard.Z)){
+        if(!this.textureChanged){
+          this.speed = 2;
+          this.loadTexture(this.runSpritesheet);
+          this.textureChanged = true;
+        }
+      }
     }
+
+    if(!this.moving){      
+      this.animations.stop();
+    }
+
   }
 
 }
