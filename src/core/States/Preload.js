@@ -82,7 +82,8 @@ class Preload extends Phaser.State{
   }
 
   loadRender() {
-    let t = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading...", CONFIG.FONT_STYLE);
+    let style = { font: "40px power_clearregular", fill: "#fff"}
+    let t = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading...", style);
     t.anchor.set(.5, .5);
   }
 
