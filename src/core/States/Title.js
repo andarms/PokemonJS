@@ -27,11 +27,7 @@ class Title extends Phaser.State {
     this.barsIntro.mask = this.masks.barsIntro;
     this.barsIntroUpx = 0;
     this.barsIntroDownx = this.game.world.width;
-    this.linesShined = false;
-
-
-    this.game.setCgo(this);
-
+    this.linesShined = false; 
   }
 
 
@@ -89,6 +85,7 @@ class Title extends Phaser.State {
     this.emitter.start(false, 1600, 5, 0);
     
     this.step = 3;
+    this.game.setCgo(this);
   }
 
   onkeydown(){}
