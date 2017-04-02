@@ -19,6 +19,8 @@ class Overwolrd extends Phaser.State{
       this.bgm = this.game.add.audio(this.map.properties.bgm);
       this.bgm.loopFull();
     }
+
+    this.game.sound.mute = true;
   }
 
   createmap(){

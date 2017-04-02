@@ -29,7 +29,7 @@ class Bootstrap extends Phaser.State{
 
 
     let debugPanel = new DebugGUI();
-    debugPanel.setupGUI(DATA.debug);
+    debugPanel.setupGUI(DATA.debug, this.game);
 
     this.state.start('Preload');
   }

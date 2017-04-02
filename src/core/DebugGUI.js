@@ -5,11 +5,18 @@ class DebugGUI extends dat.GUI {
     this.listen = 0;
   }
 
-  setupGUI(that) {
-    this.remember(that);
+  setupGUI(debug, game) {
+    this.remember(debug);
     this.debugFolder = this.addFolder('Debug');
-    this.debugFolder.add(that, 'skipTitle').name('Skip Title Screen');
+    this.musicFolder = this.addFolder('Music');
+
+    this.debugFolder.add(debug, 'skipTitle').name('Skip Title Screen');
     this.debugFolder.open();
+    
+    this.remember(game.sound);
+    this.musicFolder.add(game.sound, 'mute').name('Mute');
+    this.musicFolder.add(game.sound, 'volume', 0, 1).name('Volumen');
+    this.musicFolder.open();
   }
 }
 
