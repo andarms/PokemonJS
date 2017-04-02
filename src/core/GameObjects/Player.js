@@ -20,7 +20,7 @@ class Player extends Phaser.Sprite{
     this.textureChanged = false;
 
     this.game.physics.arcade.enable(this);    
-		this.body.collideWorldBounds = true;
+		// this.body.collideWorldBounds = true;
     this.body.setSize(32, 32, 0, 16);
     
 
@@ -116,6 +116,48 @@ class Player extends Phaser.Sprite{
     this.game.state.restart(true, false, warp.properties.map, warp.properties.x, warp.properties.y)
   }
 
+  encounter(player, grass){
+    grass.animations.play('rustling')
+    // 25% Probability of wild pokemon encounter
+    let encounterProbability = Math.random();    
+    if(encounterProbability < 0.25){
+      // Worst Probability script ever.
+      // Base in http://pokemonessentials.wikia.com/wiki/Wild_encounters
+      // I will have 12 lines to write pokemons that can appear, 
+      // each line has a specific probability (20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1) respectively
+      PKMN.start(this);
+      let randPokemon = Math.random();
+      if(randPokemon < .20 ){
+        PKMN.msgbox("Pokemon #1 has appear");        
+      }else if(randPokemon > .20 && randPokemon < .40  ){        
+        PKMN.msgbox("Pokemon #2 has appear");                
+      }else if(randPokemon > .40 && randPokemon < .50  ){        
+        PKMN.msgbox("Pokemon #3 has appear");                
+      }else if(randPokemon > .50 && randPokemon < .60  ){        
+        PKMN.msgbox("Pokemon #4 has appear");                
+      }else if(randPokemon > .60 && randPokemon < .70  ){        
+        PKMN.msgbox("Pokemon #5 has appear");                
+      }else if(randPokemon > .70 && randPokemon < .80  ){        
+        PKMN.msgbox("Pokemon #6 has appear");                
+      }else if(randPokemon > .80 && randPokemon < .85  ){        
+        PKMN.msgbox("Pokemon #7 has appear");                
+      }else if(randPokemon > .85 && randPokemon < .90  ){        
+        PKMN.msgbox("Pokemon #8 has appear");                
+      }else if(randPokemon > .90 && randPokemon < .94  ){        
+        PKMN.msgbox("Pokemon #9 has appear");                
+      }else if(randPokemon > .94 && randPokemon < .98  ){        
+        PKMN.msgbox("Pokemon #10 has appear");                
+      }else if(randPokemon > .98 && randPokemon < .99  ){        
+        PKMN.msgbox("Pokemon #11 has appear");                
+      }else if(randPokemon > .99 && randPokemon < 1  ){        
+        PKMN.msgbox("Pokemon #12 has appear");                
+      }
+      PKMN.release();
+      PKMN.end();
+    }
+
+  }
+
   update(){  
     // Check for collisions
     let vector = DIR_VECTORS[this.direction];
@@ -148,14 +190,16 @@ class Player extends Phaser.Sprite{
       this.animations.play(this.direction);
       this.body.x += vector[0] * this.speed;
       this.body.y += vector[1] * this.speed;
+      DATA.map.entities.sort('y', Phaser.Group.SORT_ASCENDING);
     }
 
     if(this.targetX == this.body.x && this.targetY == this.body.y && !this.changedTile){
       this.moving = false;
       this.frame = this.idleFrames[this.direction];
       this.changedTile = true;
-      this.game.physics.arcade.overlap(this, DATA.map.triggerscripts, this.runScript, null, this);
+      this.game.physics.arcade.overlap(this, DATA.map.triggerscripts, this.runScript, null, this);      
       this.game.physics.arcade.overlap(this, DATA.map.warps, this.teleport, null, this);
+      this.game.physics.arcade.overlap(this, DATA.map.entities, this.encounter, null, this)
     }
 
 
@@ -197,6 +241,8 @@ class Player extends Phaser.Sprite{
     if(!this.moving){      
       this.animations.stop();
     }
+
+    
 
   }
 

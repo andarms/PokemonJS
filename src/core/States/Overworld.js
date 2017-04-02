@@ -25,7 +25,6 @@ class Overwolrd extends Phaser.State{
 
   createmap(){
     this.map = this.game.add.tilemap(this.mapFilename, 32, 32);
-    console.log(this.map.properties)
     this.map.addTilesetImage('Outside', 'Outside');
     this.map.addTilesetImage('interior_general', 'interior_general');
     this.map.addTilesetImage('movement_permissions', 'movement_permissions');
@@ -40,6 +39,9 @@ class Overwolrd extends Phaser.State{
     DATA.map.collisions = this.collisions;
 
 
+    DATA.map.entities = new Phaser.Group(this.game);
+    DATA.map.entities.enableBody = true;
+
     let animatedTiles = utils.findObjectsByType('AnimatedTile', this.map, 'Events', true)
     let animatedGroup = this.game.add.group()
     for(var tile of animatedTiles){
@@ -53,9 +55,16 @@ class Overwolrd extends Phaser.State{
         true);
       animatedGroup.callAll('animations.play', 'animations', 'initial');
     }
+    
+    DATA.map.entities.add(this.player);
+
+    let tallGrassTiles = utils.findObjectsByType('TallGrass', this.map, 'Events', true)
+    for(var tile of tallGrassTiles){
+      let sprite = DATA.map.entities.create(tile.x, tile.y, 'DustandGrass')
+      DATA.map.entities.callAll('animations.add', 'animations', 'rustling', [1 ,2, 3, 0], 10, false);
+    }
 
 
-    this.game.world.add(this.player);
     this.map.createLayer('3');
 
     // Automatics script, no action button needed
@@ -84,11 +93,12 @@ class Overwolrd extends Phaser.State{
       let s = DATA.map.warps.add(this.game.add.sprite(i.x, i.y));    
       s.properties = i.properties;
     }
-
+    DATA.map.entities.sort('y', Phaser.Group.SORT_ASCENDING);
   }
 
   shutdown(){
-    this.world.remove(this.player);
+    DATA.map.entities.remove(this.player);
+    DATA.map.entities.destroy(true);
     this.bgm.stop();
   }
 
