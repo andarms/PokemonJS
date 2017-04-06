@@ -1,7 +1,7 @@
 import CONFIG from '../config';
 
 class NPC extends Phaser.Sprite{
-  constructor(game, x, y, sprite){
+  constructor(game, x, y, sprite, script, flag){
     super(game, x, y-16, sprite);
 
     this.game.physics.arcade.enable(this);    
@@ -29,6 +29,10 @@ class NPC extends Phaser.Sprite{
       "right": 8,
       "up":    12
     };
+
+    this.properties = {};
+    this.properties.name = script;
+    this.properties.flag = flag;
 
 
   }

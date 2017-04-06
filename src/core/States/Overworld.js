@@ -22,7 +22,7 @@ class Overwolrd extends Phaser.State{
       this.bgm.loopFull();
     }
 
-    let npc = new NPC(this.game, 128, 128, 'trchar001');
+    let npc = new NPC(this.game, 128, 128, 'trchar001', 'test');
     DATA.map.entities.add(npc);
   }
 

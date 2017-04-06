@@ -78,6 +78,7 @@ class Player extends Phaser.Sprite{
       this.action = this.game.add.sprite(x, y);
       this.game.physics.arcade.enable(this.action);
       this.game.physics.arcade.overlap(this.action, DATA.map.actionscripts, this.runScript, null, this);
+      this.game.physics.arcade.overlap(this.action, DATA.map.entities, this.runScript, null, this);
     }
   }
 
