@@ -1,6 +1,8 @@
 import DATA       from '../Data';
 import * as utils from '../utils';
 
+import NPC from '../GameObjects/NPC';
+
 class Overwolrd extends Phaser.State{
 
   init(mapFilename, tileX, tileY){
@@ -20,7 +22,8 @@ class Overwolrd extends Phaser.State{
       this.bgm.loopFull();
     }
 
-    this.game.sound.mute = true;
+    let npc = new NPC(this.game, 128, 128, 'trchar001');
+    DATA.map.entities.add(npc);
   }
 
   createmap(){
@@ -38,9 +41,14 @@ class Overwolrd extends Phaser.State{
     this.game.camera.follow(this.player);
     DATA.map.collisions = this.collisions;
 
-
+    // This group is used to sort the z deep of the sprites
     DATA.map.entities = new Phaser.Group(this.game);
     DATA.map.entities.enableBody = true;
+
+    // Group used to handle tall grass collisions
+    DATA.map.grass = new Phaser.Group(this.game);
+
+
 
     let animatedTiles = utils.findObjectsByType('AnimatedTile', this.map, 'Events', true)
     let animatedGroup = this.game.add.group()
@@ -62,6 +70,7 @@ class Overwolrd extends Phaser.State{
     for(var tile of tallGrassTiles){
       let sprite = DATA.map.entities.create(tile.x, tile.y, 'DustandGrass')
       DATA.map.entities.callAll('animations.add', 'animations', 'rustling', [1 ,2, 3, 0], 10, false);
+      DATA.map.grass.add(sprite);
     }
 
 

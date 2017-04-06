@@ -187,10 +187,21 @@ class Player extends Phaser.Sprite{
     }
 
     if(this.moving){
+      
       this.animations.play(this.direction);
       this.body.x += vector[0] * this.speed;
       this.body.y += vector[1] * this.speed;
       DATA.map.entities.sort('y', Phaser.Group.SORT_ASCENDING);
+      
+      let collide = this.game.physics.arcade.collide(this, DATA.map.entities);
+      if(collide){
+        this.moving = false;
+        this.currentTile.x -= vector[0];
+        this.currentTile.y -= vector[1];
+        this.targetX = this.currentTile.x * CONFIG.TILE_SIZE;
+        this.targetY = this.currentTile.y * CONFIG.TILE_SIZE;
+        this.frame = this.idleFrames[this.direction];
+      }
     }
 
     if(this.targetX == this.body.x && this.targetY == this.body.y && !this.changedTile){
@@ -199,7 +210,7 @@ class Player extends Phaser.Sprite{
       this.changedTile = true;
       this.game.physics.arcade.overlap(this, DATA.map.triggerscripts, this.runScript, null, this);      
       this.game.physics.arcade.overlap(this, DATA.map.warps, this.teleport, null, this);
-      this.game.physics.arcade.overlap(this, DATA.map.entities, this.encounter, null, this)
+      this.game.physics.arcade.overlap(this, DATA.map.grass, this.encounter, null, this);
     }
 
 
