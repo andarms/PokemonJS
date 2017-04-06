@@ -366,7 +366,7 @@
                  "name":"",
                  "properties":
                     {
-                     "name":"test"
+                     "script":"test"
                     },
                  "rotation":0,
                  "type":"TriggerScript",
@@ -381,7 +381,7 @@
                  "name":"",
                  "properties":
                     {
-                     "name":"test2"
+                     "script":"test2"
                     },
                  "rotation":0,
                  "type":"ActionScript",
@@ -421,6 +421,24 @@
                  "width":32,
                  "x":192,
                  "y":288
+                }, 
+                {
+                 "height":32,
+                 "id":187,
+                 "name":"",
+                 "properties":
+                    {
+                     "flag":"201",
+                     "script":"test",
+                     "sprite":"trchar001",
+                     "var":"201"
+                    },
+                 "rotation":0,
+                 "type":"NPC",
+                 "visible":true,
+                 "width":32,
+                 "x":128,
+                 "y":320
                 }],
          "opacity":0.899999976158142,
          "type":"objectgroup",
@@ -440,7 +458,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":187,
+ "nextobjectid":189,
  "orientation":"orthogonal",
  "properties":
     {

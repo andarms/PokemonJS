@@ -1,8 +1,8 @@
 import CONFIG from '../config';
 
 class NPC extends Phaser.Sprite{
-  constructor(game, x, y, sprite, script, flag){
-    super(game, x, y-16, sprite);
+  constructor(game, x, y, properties){
+    super(game, x, y-16, properties.sprite);
 
     this.game.physics.arcade.enable(this);    
 		// this.body.collideWorldBounds = true;
@@ -30,9 +30,7 @@ class NPC extends Phaser.Sprite{
       "up":    12
     };
 
-    this.properties = {};
-    this.properties.name = script;
-    this.properties.flag = flag;
+    this.properties = properties;
 
 
   }

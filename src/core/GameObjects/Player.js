@@ -97,7 +97,7 @@ class Player extends Phaser.Sprite{
   }
 
   runScript(player, tile){    
-    let index = tile.properties.name;
+    let index = tile.properties.script;
     let flag = tile.properties.flag;
     if(flag){
       if(!DATA.FLAGS[flag]){
