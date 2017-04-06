@@ -14,6 +14,17 @@ const EVENTS = {
     PKMN.release();
     PKMN.end();
   },
+  'npctest': ()=>{
+    PKMN.start(this);
+    PKMN.look("0", "left");
+    PKMN.look("0", "right");
+    PKMN.look("0", "up");
+    PKMN.look("0", "down");
+    PKMN.faceplayer("0");
+    PKMN.msgbox("No one is looking!");
+    PKMN.release();
+    PKMN.end();
+  },
   'playerhouse':()=>{
     PKMN.start(this);
     PKMN.msgbox("[PLAYER]'s house");

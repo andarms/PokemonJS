@@ -45,8 +45,7 @@ class Overwolrd extends Phaser.State{
     // Group used to handle tall grass collisions
     DATA.map.grass = new Phaser.Group(this.game);
     
-    // Array of npcs
-    DATA.map.npcs = {};
+    DATA.map.npcs = {}
 
 
 
@@ -73,11 +72,11 @@ class Overwolrd extends Phaser.State{
       DATA.map.grass.add(sprite);
     }
 
-    let npcs = utils.findObjectsByType('NPC', this.map, 'Events', true)
+    let npcs = utils.findObjectsByType('NPC', this.map, 'Events', true);
     for(var tile of npcs){
       let  npc = new NPC(this.game, tile.x, tile.y, tile.properties);
       DATA.map.entities.add(npc);
-      DATA.map.npcs[tile.id] = npc;
+      DATA.map.npcs[tile.name] = npc;
     }
 
 

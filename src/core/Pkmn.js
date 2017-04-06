@@ -120,6 +120,28 @@ class Pkmn{
     });    
   }
 
+
+  // NPCs Control funcitons
+  faceplayer(id){
+    this.game.eventQueue.push({
+      func: ()=>{
+        DATA.map.npcs[id].faceplayer();    
+      },
+      scope: this
+    });  
+  }
+
+  look(id, direction){
+    this.game.eventQueue.push({
+      func: ()=>{
+        DATA.map.npcs[id].look(direction);
+      },
+      scope: this
+    });  
+  }
+
+
+
 }
 
 export default Pkmn;

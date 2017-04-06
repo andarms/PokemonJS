@@ -1,4 +1,5 @@
 import CONFIG from '../config';
+import DATA   from '../Data';
 
 class NPC extends Phaser.Sprite{
   constructor(game, x, y, properties){
@@ -34,6 +35,30 @@ class NPC extends Phaser.Sprite{
 
 
   }
+
+  look(direction){
+    this.direction = direction;
+    this.frame = this.idleFrames[this.direction];
+    setTimeout(()=>{
+      this.game.eventEndSignal.dispatch()
+    }, 500);
+  }
+
+  faceplayer(){
+    switch(DATA.player.direction){
+      case 'right':
+        this.direction = 'left';break;
+      case 'left':
+        this.direction = 'right';break;
+      case 'up':
+        this.direction = 'down';break;
+      case 'down':
+        this.direction = 'up';break;
+    }
+    this.frame = this.idleFrames[this.direction];
+    this.game.eventEndSignal.dispatch();
+  }
+
 }
 
 export default NPC;

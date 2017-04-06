@@ -425,11 +425,10 @@
                 {
                  "height":32,
                  "id":187,
-                 "name":"",
+                 "name":"0",
                  "properties":
                     {
-                     "flag":"201",
-                     "script":"test",
+                     "script":"npctest",
                      "sprite":"trchar001",
                      "var":"201"
                     },

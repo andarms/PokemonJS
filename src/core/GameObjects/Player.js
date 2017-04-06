@@ -96,15 +96,15 @@ class Player extends Phaser.Sprite{
     DATA.map.collisions = collisions;
   }
 
-  runScript(player, tile){    
-    let index = tile.properties.script;
-    let flag = tile.properties.flag;
+  runScript(player, obj){    
+    let index = obj.properties.script;
+    let flag = obj.properties.flag;
     if(flag){
       if(!DATA.FLAGS[flag]){
         if(EVENTS[index]){
           EVENTS[index]();
         }
-        PKMN.setFlag(tile.properties.flag);
+        PKMN.setFlag(obj.properties.flag);
       }
     }else{
       if(EVENTS[index]){
