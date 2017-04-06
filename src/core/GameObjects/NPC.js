@@ -1,6 +1,9 @@
 import CONFIG from '../config';
 import DATA   from '../Data';
 
+const DIRECTIONS = ["up", "right", "down", "left"]
+
+
 class NPC extends Phaser.Sprite{
   constructor(game, x, y, properties){
     super(game, x, y-16, properties.sprite);
@@ -20,6 +23,10 @@ class NPC extends Phaser.Sprite{
     this.animationSpeed = 8;
     this.currentTile = {x:x/CONFIG.TILE_SIZE, y:y/CONFIG.TILE_SIZE};
 
+    this.timer = 0;
+    this.waitTime = Math.random() * (150 - 50) + 50;
+    this.lock = false;
+
     this.animations.add('down', [0, 1, 2, 3], this.animationSpeed,true);
 		this.animations.add('left', [4, 5, 6, 7], this.animationSpeed,true);
 		this.animations.add('right', [8, 9, 10, 11], this.animationSpeed,true);
@@ -33,7 +40,16 @@ class NPC extends Phaser.Sprite{
 
     this.properties = properties;
 
+    if(this.properties.direction){
+      this.direction = this.properties.direction;
+      this.frame = this.idleFrames[this.direction];
+    }
 
+
+  }
+
+  release(){
+    this.lock = false;
   }
 
   look(direction){
@@ -57,6 +73,26 @@ class NPC extends Phaser.Sprite{
     }
     this.frame = this.idleFrames[this.direction];
     this.game.eventEndSignal.dispatch();
+  }
+
+  lookAround(){
+    if(this.lock) return;
+    if(this.timer > this.waitTime){
+      let dir = Phaser.ArrayUtils.getRandomItem(DIRECTIONS);
+      this.direction = dir;
+      this.frame = this.idleFrames[this.direction];
+      this.waitTime = Math.random() * (150 - 50) + 50;
+      this.timer = 0;
+    }
+  }
+
+  update(){
+    switch(this.properties.movement){
+      case "0": break; // No movement
+      case "1": this.lookAround(); break;
+    }
+
+    this.timer++;
   }
 
 }

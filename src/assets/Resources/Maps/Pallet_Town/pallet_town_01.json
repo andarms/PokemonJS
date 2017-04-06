@@ -413,7 +413,7 @@
                  "name":"",
                  "properties":
                     {
-                     "name":"playerhouse"
+                     "script":"playerhouse"
                     },
                  "rotation":0,
                  "type":"ActionScript",
@@ -428,6 +428,8 @@
                  "name":"0",
                  "properties":
                     {
+                     "direction":"left",
+                     "movement":"1",
                      "script":"npctest",
                      "sprite":"trchar001",
                      "var":"201"

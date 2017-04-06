@@ -115,6 +115,10 @@ class Pkmn{
     this.game.eventQueue.push({
       func: ()=>{
         this.game.setCgo(DATA.player);
+        // Realse all npc to follow his normal behavior.
+        for (var index in DATA.map.npcs){
+          DATA.map.npcs[index].release();
+        }
       },
       scope: this
     });    
@@ -122,9 +126,11 @@ class Pkmn{
 
 
   // NPCs Control funcitons
+  // 
   faceplayer(id){
     this.game.eventQueue.push({
       func: ()=>{
+        DATA.map.npcs[id].lock = true;
         DATA.map.npcs[id].faceplayer();    
       },
       scope: this
@@ -134,6 +140,7 @@ class Pkmn{
   look(id, direction){
     this.game.eventQueue.push({
       func: ()=>{
+        DATA.map.npcs[id].lock = true;
         DATA.map.npcs[id].look(direction);
       },
       scope: this
