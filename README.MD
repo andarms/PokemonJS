@@ -9,14 +9,9 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 * Node js and npm (download [here](https://nodejs.org/en/download/))
-* Git (download [here](https://git-scm.com/downloads))
-* brunch.io
-
-after install Node and git run this command to install brunch
-```
-npm install -g brunch
-```
-
+* Git (Optinal) (download [here](https://git-scm.com/downloads))
+ 
+ 
 ### Installing
 
 A step by step series of examples that tell you have to get a development env of Pokmeonjs running
@@ -36,7 +31,7 @@ npm install
 When all the pakages are installed you can run  PokemonJS
 
 ```
-brunch wacth --server
+npm run dev
 ```
 
 ## Authors

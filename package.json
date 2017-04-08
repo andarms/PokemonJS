@@ -4,6 +4,9 @@
   "description": "Javascript Pokemon Game",
   "main": "main.js",
   "scripts": {
+    "dev": "concurrently --kill-others \"brunch watch\" \"electron . \"",
+    "electron": "electron .",
+    "watch": "brunch watch",
     "postinstall": "brunch build -p"
   },
   "dependencies": {
@@ -18,6 +21,7 @@
   "devDependencies": {
     "auto-reload-brunch": "^2.0.0",
     "clean-css-brunch": "^2.0.0",
+    "concurrently": "^3.4.0",
     "css-brunch": "^2.0.0",
     "electron": "^1.6.2"
   },
