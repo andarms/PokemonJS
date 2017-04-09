@@ -21,7 +21,7 @@
   <script>
     // Integration with Electron
     // Remove the electron nodejs require.
-    // window.NodeRequire = require;
+    window.NodeRequire = require;
     delete window.require;
     delete window.exports;
     delete window.module;

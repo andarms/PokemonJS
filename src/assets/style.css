@@ -40,7 +40,7 @@ canvas{
   20%,60%{transform:rotate(-25deg)}
   40%,80%{transform:rotate(10deg)}
 }
-@media (max-width:500px){
+@media (max-width:760px){
   .github-corner{
     display: none;
   }

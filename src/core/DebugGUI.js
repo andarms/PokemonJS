@@ -11,12 +11,11 @@ class DebugGUI extends dat.GUI {
     this.musicFolder = this.addFolder('Music');
 
     this.debugFolder.add(debug, 'skipTitle').name('Skip Title Screen');
-    this.debugFolder.open();
     
     this.remember(game.sound);
     this.musicFolder.add(game.sound, 'mute').name('Mute');
     this.musicFolder.add(game.sound, 'volume', 0, 1).name('Volumen');
-    this.musicFolder.open();
+    this.close();
   }
 }
 

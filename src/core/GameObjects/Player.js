@@ -194,6 +194,7 @@ class Player extends Phaser.Sprite{
       this.body.y += vector[1] * this.speed;
       DATA.map.entities.sort('y', Phaser.Group.SORT_ASCENDING);
       
+      // collision with NPCs and Objects
       let collide = this.game.physics.arcade.collide(this, DATA.map.entities);
       if(collide){
         this.moving = false;
@@ -209,6 +210,7 @@ class Player extends Phaser.Sprite{
       this.moving = false;
       this.frame = this.idleFrames[this.direction];
       this.changedTile = true;
+      DATA.map.entities.sort('y', Phaser.Group.SORT_ASCENDING);
       this.game.physics.arcade.overlap(this, DATA.map.triggerscripts, this.runScript, null, this);      
       this.game.physics.arcade.overlap(this, DATA.map.warps, this.teleport, null, this);
       this.game.physics.arcade.overlap(this, DATA.map.grass, this.encounter, null, this);
