@@ -1,6 +1,6 @@
 ![Pokemon JS logo](src/assets/Resources/Graphics/Titles/pokemonjs.png)
 
-A third generation Pokemon game written in Javascript using [phaser.io](http://phaser.io/). Inspired by [Pokemon essentials](http://pokemonessentials.wikia.com/wiki/Pok%C3%A9mon_Essentials_Wiki) and this project aims to be another tool alternive to fans to make pokemon fan games. You can se the demo here [https://pkmnjs.herokuapp.com/](https://pkmnjs.herokuapp.com/)
+A third generation Pokemon game written in Javascript using [phaser.io](http://phaser.io/) and [Electron](https://electron.atom.io/). Inspired by [Pokemon essentials](http://pokemonessentials.wikia.com/wiki/Pok%C3%A9mon_Essentials_Wiki) and this project aims to be another tool alternive to fans to make pokemon fan games.
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 * Node js and npm (download [here](https://nodejs.org/en/download/))
-* Git (Optinal) (download [here](https://git-scm.com/downloads))
+* Git (download [here](https://git-scm.com/downloads))
  
  
 ### Installing
