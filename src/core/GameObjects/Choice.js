@@ -25,7 +25,7 @@ class Choice extends Phaser.Group{
     for(let o of options){
       o.x = x+paddingLeft
       o.y = y+paddingTop
-      let line =  this.game.add.text(o.x, o.y, o.text, CONFIG.FONT_STYLE);
+      let line =  this.game.add.text(o.x, o.y, o.text, CONFIG.FONT.BLACK);
       y += line.height
       if(o.text.length > maxLength) maxLength = o.text.length
       windowSkin.targetHeight += line.height;

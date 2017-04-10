@@ -16,7 +16,7 @@ class Overwolrd extends Phaser.State{
     this.game.setCgo(this.player);
     this.createmap();
     this.player.setMapPosition(this.tileX, this.tileY);
-
+    DATA.mapFilename = this.mapFilename;
     if(this.map.properties.bgm){
       this.bgm = this.game.add.audio(this.map.properties.bgm);
       this.bgm.loopFull();

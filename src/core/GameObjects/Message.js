@@ -22,8 +22,8 @@ class Message extends Phaser.Group{
     this.paragraphsIndex = 0;
     this.linesIndex = 0;
     
-    this.line1 =  this.game.add.text(x+paddingLeft, y+paddingTop, "", CONFIG.FONT_STYLE);
-    this.line2 =  this.game.add.text(x+paddingLeft, y+paddingTop+40, "", CONFIG.FONT_STYLE);
+    this.line1 =  this.game.add.text(x+paddingLeft, y+paddingTop, "", CONFIG.FONT.BLACK);
+    this.line2 =  this.game.add.text(x+paddingLeft, y+paddingTop+40, "", CONFIG.FONT.BLACK);
     
     this.keep = keep || false;
     // DATA.player.lock()
@@ -106,7 +106,7 @@ class Message extends Phaser.Group{
 
   format(text){
     if(DATA.player){
-      text = text.replace("[PLAYER]", DATA.player.name);
+      text = text.replace("[PLAYER]", DATA.player.data.name);
     }
     return text;
   }

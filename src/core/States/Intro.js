@@ -58,7 +58,7 @@ class Intro extends Phaser.State{
 
   genderSelected(){
     let gender = DATA.FLAGS['gender'];
-    DATA.player = new Player(this.game, gender);
+    DATA.player = new Player(this.game, {gender: gender});
     this.game.world.remove(this.professor);
     this.playerSprite = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY-30, DATA.player.frontSprite);
     this.playerSprite.anchor.set(.5, .5);

@@ -12,7 +12,7 @@ class Menu extends Phaser.Group{
       {text: 'Pokédex', action:        this.pokedex},
       {text: 'Pokémon', action:        this.pokemons},
       {text: 'Bag', action:            this.bag},
-      {text: DATA.player.name, action: this.playerInfo},
+      {text: DATA.player.data.name, action: this.playerInfo},
       {text: 'Save', action:           this.save},
       {text: 'Options', action:        this.options},
       {text: 'Exit', action:           this.exit},
@@ -37,7 +37,7 @@ class Menu extends Phaser.Group{
     for(let o of options){
       o.x = x+paddingLeft
       o.y = y+paddingTop
-      let line =  this.game.add.text(o.x, o.y, o.text, CONFIG.FONT_STYLE);
+      let line =  this.game.add.text(o.x, o.y, o.text, CONFIG.FONT.BLACK_SM);
       y += line.height
       if(o.text.length > maxLength) maxLength = o.text.length
       windowSkin.targetHeight += line.height;
@@ -47,7 +47,6 @@ class Menu extends Phaser.Group{
 
 
     this.menu.x += this.game.width - windowSkin.targetWidth;
-    // this.menu.y = this.message.roof - windowSkin.targetHeight;
 
     this.options = options;
     this.optionsIndex = 0;
@@ -85,6 +84,12 @@ class Menu extends Phaser.Group{
       this.alive = false;
       this.destroy();      
     }
+    if(key == Phaser.Keyboard.Z){
+      PKMN.release();
+      this.game.eventEndSignal.dispatch();
+      this.alive = false;
+      this.destroy();      
+    }
   }
 
   pokedex(){
@@ -96,7 +101,21 @@ class Menu extends Phaser.Group{
   bag(){
     PKMN.release();
   }
+/**       
+* @function save
+* save the game DATA intolocalStorage,
+* to avoid circularity don't copy the Player Sprite
+* and the maps objects.
+*/
   save(){
+    let map = DATA.map;
+    let player = DATA.player;
+    DATA.map = {};
+    DATA.player = null;
+    localStorage.setItem('PLAYER_DATA', JSON.stringify(player.data));
+    localStorage.setItem('DATA', JSON.stringify(DATA));
+    DATA.player = player;
+    DATA.map = map;
     PKMN.release();
   }
   playerInfo(){

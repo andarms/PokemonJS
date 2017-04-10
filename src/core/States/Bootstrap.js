@@ -15,7 +15,7 @@ class Bootstrap extends Phaser.State{
 
 
     // Force to load font
-    var text = this.game.add.text(0, 0, "Force to load Font", CONFIG.FONT_STYLE);
+    var text = this.game.add.text(0, 0, "Force to load Font", CONFIG.FONT.BLACK);
 
     // This state and only this state is in charge of handling user inputs. 
     // This way I can avoid the overload of keyboard events and make things a bit more organized.

@@ -12,33 +12,35 @@ let DIR_VECTORS = {
 }
 
 class Player extends Phaser.Sprite{
-  constructor(game, gender){
-    let spritesheet = 'trchar00' + gender;
+  constructor(game, data){
+    let spritesheet = 'trchar00' + data.gender;
     super(game, 0, 0, spritesheet);
+
+    this.data = data;
     
     this.normalSpritesheet = spritesheet;
-    this.runSpritesheet = gender == 0 ? 'boy_run': 'girl_run';
+    this.runSpritesheet = data.gender == 0 ? 'boy_run': 'girl_run';
     this.textureChanged = false;
 
-    this.game.physics.arcade.enable(this);    
+    this.game.physics.arcade.enable(this);
 		// this.body.collideWorldBounds = true;
     this.body.setSize(32, 32, 0, 16);
     
 
     
     this.oldDirection = '';
-    this.direction = 'down';
-    this.gender = gender;
+    this.data.direction = this.data.direction || 'down';
+    this.data.gender = data.gender;
     this.moving = false;
     this.changedTile = true;
     this.speed = 1;
     this.animationSpeed = 8;
-    this.currentTile = {x:0, y:0};
+    this.data.currTile = this.data.currTile  || {x:0, y:0};
     
 
 
     
-    if(this.gender == 0){
+    if(this.data.gender == 0){
       this.frontSprite = 'introBoy';
     }else{
       this.frontSprite = 'introGirl';
@@ -54,6 +56,8 @@ class Player extends Phaser.Sprite{
       "right": 8,
       "up":    12
     };
+
+    this.frame = this.idleFrames[this.data.direction];
 
 
   }
@@ -75,9 +79,9 @@ class Player extends Phaser.Sprite{
     }
 
     if(key == Phaser.Keyboard.X && !this.moving){
-      let vector = DIR_VECTORS[this.direction];
-      let x = (this.currentTile.x + vector[0]) * CONFIG.TILE_SIZE;
-      let y = (this.currentTile.y + vector[1]) * CONFIG.TILE_SIZE;
+      let vector = DIR_VECTORS[this.data.direction];
+      let x = (this.data.currTile.x + vector[0]) * CONFIG.TILE_SIZE;
+      let y = (this.data.currTile.y + vector[1]) * CONFIG.TILE_SIZE;
       this.action = this.game.add.sprite(x, y);
       this.game.physics.arcade.enable(this.action);
       this.game.physics.arcade.overlap(this.action, DATA.map.actionscripts, this.runScript, null, this);
@@ -91,8 +95,8 @@ class Player extends Phaser.Sprite{
     this.y = CONFIG.TILE_SIZE * y - 16;
     this.targetX = this.x;
     this.targetY = this.y + 16;
-    this.currentTile.x = x;
-    this.currentTile.y = y;
+    this.data.currTile.x = x;
+    this.data.currTile.y = y;
   }
 
   setCollisions(collisions){
@@ -164,27 +168,27 @@ class Player extends Phaser.Sprite{
 
   update(){  
     // Check for collisions
-    let vector = DIR_VECTORS[this.direction];
+    let vector = DIR_VECTORS[this.data.direction];
     if(this.moving && this.changedTile){
-      let nextX = this.currentTile.x + vector[0];          
-      let nextY = this.currentTile.y + vector[1];
+      let nextX = this.data.currTile.x + vector[0];          
+      let nextY = this.data.currTile.y + vector[1];
       // Keep the player in the wolrd bounds
       if(nextX < 0 || nextY < 0 || nextY > DATA.map.collisions.layer.data.length-1 || nextX > DATA.map.collisions.layer.data[0].length-1){
         this.moving = false;
-        this.targetX = this.currentTile.x * CONFIG.TILE_SIZE;
-        this.targetY = this.currentTile.y * CONFIG.TILE_SIZE;
-        this.frame = this.idleFrames[this.direction];
+        this.targetX = this.data.currTile.x * CONFIG.TILE_SIZE;
+        this.targetY = this.data.currTile.y * CONFIG.TILE_SIZE;
+        this.frame = this.idleFrames[this.data.direction];
       }else{
         let nextTile = DATA.map.collisions.layer.data[nextY][nextX];
         if(nextTile.properties.collide){
             this.moving = false;
-            this.targetX = this.currentTile.x * CONFIG.TILE_SIZE;
-            this.targetY = this.currentTile.y * CONFIG.TILE_SIZE;
-            this.frame = this.idleFrames[this.direction];
+            this.targetX = this.data.currTile.x * CONFIG.TILE_SIZE;
+            this.targetY = this.data.currTile.y * CONFIG.TILE_SIZE;
+            this.frame = this.idleFrames[this.data.direction];
             // pLay collision sound
         }else{
-          this.currentTile.x = nextX;
-          this.currentTile.y = nextY;
+          this.data.currTile.x = nextX;
+          this.data.currTile.y = nextY;
           this.changedTile = false;          
         }
       }
@@ -192,7 +196,7 @@ class Player extends Phaser.Sprite{
 
     if(this.moving){
       
-      this.animations.play(this.direction);
+      this.animations.play(this.data.direction);
       this.body.x += vector[0] * this.speed;
       this.body.y += vector[1] * this.speed;
       DATA.map.entities.sort('y', Phaser.Group.SORT_DECSENDING);
@@ -201,17 +205,17 @@ class Player extends Phaser.Sprite{
       let collide = this.game.physics.arcade.collide(this, DATA.map.entities);
       if(collide){
         this.moving = false;
-        this.currentTile.x -= vector[0];
-        this.currentTile.y -= vector[1];
-        this.targetX = this.currentTile.x * CONFIG.TILE_SIZE;
-        this.targetY = this.currentTile.y * CONFIG.TILE_SIZE;
-        this.frame = this.idleFrames[this.direction];
+        this.data.currTile.x -= vector[0];
+        this.data.currTile.y -= vector[1];
+        this.targetX = this.data.currTile.x * CONFIG.TILE_SIZE;
+        this.targetY = this.data.currTile.y * CONFIG.TILE_SIZE;
+        this.frame = this.idleFrames[this.data.direction];
       }
     }
 
     if(this.targetX == this.body.x && this.targetY == this.body.y && !this.changedTile){
       this.moving = false;
-      this.frame = this.idleFrames[this.direction];
+      this.frame = this.idleFrames[this.data.direction];
       this.changedTile = true;
       DATA.map.entities.sort('y', Phaser.Group.SORT_DECSENDING);
       this.game.physics.arcade.overlap(this, DATA.map.triggerscripts, this.runScript, null, this);      
@@ -223,26 +227,26 @@ class Player extends Phaser.Sprite{
     if(!this.moving && this.game.cgo == this){
       if(this.game.input.keyboard.isDown(Phaser.Keyboard.UP)){
         this.targetY -= CONFIG.TILE_SIZE;
-        this.oldDirection = this.direction;
-        this.direction = "up";
+        this.oldDirection = this.data.direction;
+        this.data.direction = "up";
         this.moving = true;
       }
       else if(this.game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
         this.targetY += CONFIG.TILE_SIZE;
-        this.oldDirection = this.direction;
-        this.direction = "down";
+        this.oldDirection = this.data.direction;
+        this.data.direction = "down";
         this.moving = true;
       }
       else if(this.game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
         this.targetX -= CONFIG.TILE_SIZE;
-        this.oldDirection = this.direction;
-        this.direction = "left";
+        this.oldDirection = this.data.direction;
+        this.data.direction = "left";
         this.moving = true;
       }
       else if(this.game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
         this.targetX += CONFIG.TILE_SIZE;
-        this.oldDirection = this.direction;
-        this.direction = "right";
+        this.oldDirection = this.data.direction;
+        this.data.direction = "right";
         this.moving = true;
       }
 

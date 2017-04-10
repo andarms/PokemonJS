@@ -15,7 +15,7 @@ class NameScreen extends Phaser.Group{
     this.add(this.bgani)
     this.add(windowSkin)
 
-    let text = this.game.add.text(x+96, y+10, "What's your name?", CONFIG.FONT_STYLE);
+    let text = this.game.add.text(x+96, y+10, "What's your name?", CONFIG.FONT.BLACK);
 
     let config = {
       font: '32px power_clearregular',
@@ -38,8 +38,8 @@ class NameScreen extends Phaser.Group{
   onkeydown(){}
   onkeyup(key){
     if(key == Phaser.Keyboard.ENTER){
-      this.object.name = this.input.value;
-      if (this.object.name.trim() == ""){
+      this.object.data.name = this.input.value;
+      if (this.object.data.name.trim() == ""){
         this.getDefaultName()
       }
       this.game.eventEndSignal.dispatch();
@@ -68,6 +68,6 @@ export class PlayerNameScreen extends NameScreen{
   }
 
   getDefaultName(){
-    this.object.name = DATA.defaultName[DATA.player.gender];
+    this.object.data.name = DATA.defaultName[DATA.player.data.gender];
   }
 }
