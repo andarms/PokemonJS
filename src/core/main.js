@@ -52,6 +52,18 @@ if(window.NodeRequire){
               }
             }
           ]
+        }        
+      ],
+    },
+    {
+      label: 'debug',
+      submenu: [
+        {
+          label: 'Show Console',
+          type: 'checkbox',
+          click: ()=>{
+            win.toggleDevTools();
+          }
         }
       ]
     }

@@ -11,6 +11,7 @@ const CONFIG = {
       Phaser.Keyboard.DOWN,
       Phaser.Keyboard.LEFT,
     ],
-    FONT_STYLE: { font: "32px power_clearregular", fill: "#000"}
+    FONT_STYLE: { font: "32px power_clearregular", fill: "#000"},
+    FONT_SMALL: { font: "24px power_clearregular", fill: "#000"}
 };
 export default CONFIG;

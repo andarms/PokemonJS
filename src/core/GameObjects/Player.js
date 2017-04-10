@@ -2,6 +2,7 @@ import CONFIG from '../config';
 import DATA   from '../Data';
 import EVENTS from '../Events';
 import {PKMN} from '../main';
+import Menu   from './Menu';
 
 let DIR_VECTORS = {
   "left":  [-1, 0], 
@@ -69,6 +70,8 @@ class Player extends Phaser.Sprite{
 
     if(key == Phaser.Keyboard.ENTER && !this.moving){
       //Open menu;    
+      let m = new Menu(this.game);
+      this.game.setCgo(m);
     }
 
     if(key == Phaser.Keyboard.X && !this.moving){
@@ -192,7 +195,7 @@ class Player extends Phaser.Sprite{
       this.animations.play(this.direction);
       this.body.x += vector[0] * this.speed;
       this.body.y += vector[1] * this.speed;
-      DATA.map.entities.sort('y', Phaser.Group.SORT_ASCENDING);
+      DATA.map.entities.sort('y', Phaser.Group.SORT_DECSENDING);
       
       // collision with NPCs and Objects
       let collide = this.game.physics.arcade.collide(this, DATA.map.entities);
@@ -210,7 +213,7 @@ class Player extends Phaser.Sprite{
       this.moving = false;
       this.frame = this.idleFrames[this.direction];
       this.changedTile = true;
-      DATA.map.entities.sort('y', Phaser.Group.SORT_ASCENDING);
+      DATA.map.entities.sort('y', Phaser.Group.SORT_DECSENDING);
       this.game.physics.arcade.overlap(this, DATA.map.triggerscripts, this.runScript, null, this);      
       this.game.physics.arcade.overlap(this, DATA.map.warps, this.teleport, null, this);
       this.game.physics.arcade.overlap(this, DATA.map.grass, this.encounter, null, this);
