@@ -79,13 +79,13 @@ HealthBar.prototype.drawBackground = function() {
 };
 
 HealthBar.prototype.drawHealthBar = function() {
-    var bmd = this.game.add.bitmapData(this.config.width, this.config.height);
-    bmd.ctx.fillStyle = this.config.bar.color;
-    bmd.ctx.beginPath();
-    bmd.ctx.rect(0, 0, this.config.width, this.config.height);
-    bmd.ctx.fill();
+    this.barBitmap = this.game.add.bitmapData(this.config.width, this.config.height);
+    this.barBitmap.ctx.fillStyle = this.config.bar.color;
+    this.barBitmap.ctx.beginPath();
+    this.barBitmap.ctx.rect(0, 0, this.config.width, this.config.height);
+    this.barBitmap.ctx.fill();
 
-    this.barSprite = this.game.add.sprite(this.x - this.bgSprite.width/2, this.y, bmd);
+    this.barSprite = this.game.add.sprite(this.x - this.bgSprite.width/2, this.y, this.barBitmap);
     this.barSprite.anchor.y = 0.5;
     if (this.flipped){
       this.barSprite.anchor.x = 1;
@@ -136,6 +136,10 @@ HealthBar.prototype.setAnchor = function(xAnchor, yAnchor) {
       this.barSprite.anchor.x = 1;
       this.barSprite.position.x = this.bgSprite.position.x;
     }
+};
+
+HealthBar.prototype.setBarColor = function(color) {
+    this.barBitmap.ctx.fillColor = 0x5B5B5B;
 };
 
 HealthBar.prototype.kill = function() {

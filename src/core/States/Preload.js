@@ -37,6 +37,8 @@ class Preload extends Phaser.State{
     this.game.load.image('interior_general', 'Resources/Graphics/Tilesets/Interior_general.png')
     this.game.load.image('movement_permissions', 'Resources/Graphics/Tilesets/movement_permissions.png')
 
+    this.game.load.image('bar_bg', 'Resources/Graphics/Pictures/battle/bar_bg.png')
+    
     // General Pictures
     this.game.load.image('shadeFull', 'Resources/Graphics/Pictures/shadeFull.png')
     this.game.load.image('newBattleMessageBox', 'Resources/Graphics/Pictures/newBattleMessageBox.png')
