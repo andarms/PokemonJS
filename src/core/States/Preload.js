@@ -31,7 +31,7 @@ class Preload extends Phaser.State{
 
     // Tilesets
     this.game.load.image('Outside', 'Resources/Graphics/Tilesets/Outside.png')
-    this.game.load.image('battlebgField', 'Resources/Graphics/Battlebacks/battlebgField.png')
+    this.game.load.image('bg-meadow', 'Resources/Graphics/Battlebacks/bg-meadow.jpg')
     this.game.load.image('playerbaseCityGrass', 'Resources/Graphics/Battlebacks/playerbaseCityGrass.png')
     this.game.load.image('enemybaseCityGrass', 'Resources/Graphics/Battlebacks/enemybaseCityGrass.png')
     this.game.load.image('interior_general', 'Resources/Graphics/Tilesets/Interior_general.png')
@@ -103,7 +103,7 @@ class Preload extends Phaser.State{
     this.game.cache.addNinePatch('choice_1', 'choice_1', null, 16, 16, 16, 16)
     this.game.cache.addNinePatch('speech_hgss_1', 'speech_hgss_1', null, 32, 48, 16, 16)    
     if(DATA.debug.skipTitle){
-      this.state.start('Load');
+      this.state.start('Battle');
     }else{
       this.state.start('Title');
     }

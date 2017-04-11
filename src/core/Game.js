@@ -1,15 +1,17 @@
 import CONFIG    from './config';
+import Battle    from './States/Battle';
 import Bootstrap from './States/Bootstrap';
 import Intro     from './States/Intro';
-import Load     from './States/Load';
+import Load      from './States/Load';
 import Overworld from './States/Overworld';
 import Preload   from './States/Preload';
-import Title   from './States/Title';
+import Title     from './States/Title';
 
 class Game extends Phaser.Game{
   constructor(){
     super(CONFIG.WIDTH, CONFIG.HEIGTH, Phaser.AUTO, null, null, false, false);
 
+    this.state.add('Battle', Battle);
     this.state.add('Bootstrap', Bootstrap);
     this.state.add('Intro', Intro);
     this.state.add('Load', Load);
