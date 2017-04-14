@@ -13,11 +13,11 @@ const CONFIG = {
     ],
     FONT: {
       BLACK: { font: "32px power_clearregular", fill: "#000"},
-      WHITE: { font: "32px power_clearregular", fill: "#fff"},
+      WHITE: { font: "32px power_clearregular", fill: "#fff", strokeThickness:3, stoke: "#000"},
       BLACK_SM: { font: "24px power_clearregular", fill: "#000"},
-      WHITE_SM: { font: "24px power_clearregular", fill: "#fff"},
+      WHITE_SM: { font: "24px power_clearregular", fill: "#fff", strokeThickness:3, stoke: "#000"},
       BLACK_XS: { font: "18px power_clearregular", fill: "#000"},
-      WHITE_XS: { font: "18px power_clearregular", fill: "#fff"},
+      WHITE_XS: { font: "18px power_clearregular", fill: "#fff", strokeThickness:3, stoke: "#000"},
     }
 };
 export default CONFIG;

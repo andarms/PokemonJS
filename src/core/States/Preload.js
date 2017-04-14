@@ -39,6 +39,8 @@ class Preload extends Phaser.State{
 
     this.game.load.image('hp_bar_bg', 'Resources/Graphics/Pictures/battle/hp_bar_bg.png')
     this.game.load.spritesheet('hp_bar', 'Resources/Graphics/Pictures/battle/hp_bar.png', 224, 48)
+    this.game.load.image('foe_hp_bar_bg', 'Resources/Graphics/Pictures/battle/foe_hp_bar_bg.png')
+    this.game.load.spritesheet('foe_hp_bar', 'Resources/Graphics/Pictures/battle/foe_hp_bar.png', 224, 32)
     this.game.load.image('exp_bar_bg', 'Resources/Graphics/Pictures/battle/exp_bar_bg.png')
     this.game.load.image('exp_bar', 'Resources/Graphics/Pictures/battle/exp_bar.png')
     
