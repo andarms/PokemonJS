@@ -35,6 +35,10 @@ class Battle extends Phaser.State {
     front.animations.add('front', frames2, 30, true);
     front.animations.play('front');
 
+    let s= this.game.add.sprite(0, 384, 'command_menu');
+    s.anchor.set(0, 1);
+
+    
     this.a = this.game.add.sprite(16, 300, 'hp_bar_bg')
     this.b = this.game.add.sprite(16, 300, 'hp_bar')
     this.c = this.game.add.sprite(32, 312,'exp_bar_bg')
@@ -76,63 +80,24 @@ class Battle extends Phaser.State {
     this.foeLevel.addColor("#ffff00", 0);
     this.foeLevel.addColor("#ffffff", 3);
 
+    this.game.add.text(8, 344, 'What will Abomasnow do?', CONFIG.FONT.WHITE_SM)
 
-    // b.width = 100;
-    // 
-
-    // var hpBarConfig = {
-    //   x: 16, 
-    //   y: 300, 
-    //   width: 216,
-    //   height: 36,
-    //   bg:{
-    //     color: '#333'
-    //   },
-    //   bar: {
-    //     color: '#00b034'
-    //   },
-    // };
-    // var expBarConfig = {
-    //   x: 20, 
-    //   y: 324, 
-    //   width: 120,
-    //   height: 18,
-    //   bg: {
-    //     color: '#555'
-    //   },
-    //   bar: {
-    //     color: '#00a8ec'
-    //   },
-    // };
-	  // this.myHealthBar = new HealthBar(this.game, hpBarConfig);
-	  // this.expBar = new HealthBar(this.game, expBarConfig);
-    // this.myHealthBar.setAnchor(0, .5);
-    // this.expBar.setAnchor(0, .5);
-
-    // this.name =  this.game.add.text(24, 300, 'Feraligatr', CONFIG.FONT.WHITE);
-    // this.hppoint =  this.game.add.text(220, 310, '75 / 130', CONFIG.FONT.WHITE_XS);
-    // this.level =  this.game.add.text(24, 324, 'Lv. 55', CONFIG.FONT.WHITE_XS);
-    // this.level.anchor.set(0, .5);
-    // this.name.anchor.set(0, .5)
-    // this.hppoint.anchor.set(1, .5)
-
-
-
-    // var foeBar = {
-    //   x: 496, 
-    //   y: 16, 
-    //   width: 224,
-    //   height: 32,
-    //   bg: {
-    //     color: '#333'
-    //   },
-    //   bar: {
-    //     color: '#00b034'
-    //   },
-    // };
-	  // this.foeBar = new HealthBar(this.game, foeBar);
-    // this.foeBar.setAnchor(1, 0);
-    // this.game.add.text(272, 12, 'Icineroar', CONFIG.FONT.WHITE);
+    this.btn = this.game.add.sprite(406, 304, 'btn3')
+    this.btn2 = this.game.add.sprite(498, 304, 'btn3', 3)
+    this.btn3 = this.game.add.sprite(406, 352, 'btn3', 5)
+    this.btn4 = this.game.add.sprite(498, 352, 'btn3', 7)
+    this.btn.anchor.set(1, .5)
+    this.btn2.anchor.set(1, .5)
+    this.btn3.anchor.set(1, .5)
+    this.btn4.anchor.set(1, .5)
+    this.t1 = this.game.add.text(this.btn.centerX, this.btn.centerY, 'FIGTH', CONFIG.FONT.WHITE_XS);
+    this.t2 = this.game.add.text(this.btn2.centerX, this.btn2.centerY, 'PARTY', CONFIG.FONT.WHITE_XS);
+    this.t3 = this.game.add.text(this.btn3.centerX, this.btn3.centerY, 'BAG', CONFIG.FONT.WHITE_XS);
+    this.t4 = this.game.add.text(this.btn4.centerX, this.btn4.centerY, 'RUN', CONFIG.FONT.WHITE_XS);
+    this.t1.anchor.set(.5, .4)
+    this.t2.anchor.set(.5, .4)
+    this.t3.anchor.set(.5, .4)
+    this.t4.anchor.set(.5, .4)
 
 
     this.game.setCgo(this)
