@@ -44,10 +44,12 @@ class Battle extends Phaser.State {
     this.c = this.game.add.sprite(32, 312,'exp_bar_bg')
     this.d = this.game.add.tileSprite(32, 312, 120, 16, 'exp_bar')
     this.a.anchor.set(0, .5)
-    this.b.anchor.set(0, .5)
+    this.b.anchor.set(0, .5);
 
-    this.bRect = new Phaser.Rectangle(0, 0, this.b.width, this.b.height);
-    this.b.crop(this.bRect)
+    this.b_mask = this.game.add.graphics(this.b.left, this.b.top);
+    this.b_mask.beginFill(0xffffff);
+    this.b_mask.drawRect(0, 0, this.b.width, this.b.height);
+    this.b.mask = this.b_mask;
 
 
     this.name =  this.game.add.text(32, 300, '♀ Abomasnow', CONFIG.FONT.WHITE_SM);
@@ -82,7 +84,7 @@ class Battle extends Phaser.State {
 
     this.game.add.text(8, 344, 'What will Abomasnow do?', CONFIG.FONT.WHITE_SM)
 
-    this.btn = this.game.add.sprite(406, 304, 'btn3')
+    this.btn = this.game.add.sprite(406, 304, 'btn3', 0)
     this.btn2 = this.game.add.sprite(498, 304, 'btn3', 3)
     this.btn3 = this.game.add.sprite(406, 352, 'btn3', 5)
     this.btn4 = this.game.add.sprite(498, 352, 'btn3', 7)
@@ -110,17 +112,13 @@ class Battle extends Phaser.State {
   onkeyup(key){
     if(key == Phaser.Keyboard.ENTER){
       // this.game.state.start('OverWorld', true, false, DATA.mapFilename, DATA.player.data.currTile.x, DATA.player.data.currTile.y)
-      // this.myHealthBar.setPercent(25);
-      // this.expBar.setPercent(50);
-      // this.foeBar.setPercent(47);
-      this.game.add.tween(this.bRect).to( { width: 50 }, 1000, Phaser.Easing.Linear.None, true);      
+      this.game.add.tween(this.b_mask).to( { width: 50 }, 1000, Phaser.Easing.Linear.None, true);      
       this.game.add.tween(this.d).to( { width: 50 }, 1000, Phaser.Easing.Linear.None, true);
       this.b.frame = 2;
     }
   }
 
   update(){
-    this.b.updateCrop();
   }
 }
 
