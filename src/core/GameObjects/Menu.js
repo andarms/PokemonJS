@@ -1,23 +1,46 @@
-import CONFIG      from '../config';
-import DATA        from '../Data';
-import {GFX, PKMN} from '../main';
-import Message     from './Message';
+import CONFIG from '../config';
+import DATA from '../Data';
+import {
+  GFX,
+  PKMN
+} from '../main';
+import Message from './Message';
 
-class Menu extends Phaser.Group{
-  constructor(game){
+class Menu extends Phaser.Group {
+  constructor(game) {
     super(game);
     let x = this.game.camera.view.x;
     let y = this.game.camera.view.y;
-    let options = [
-      {text: 'Pokédex', action:        this.pokedex},
-      {text: 'Pokémon', action:        this.pokemons},
-      {text: 'Bag', action:            this.bag},
-      {text: DATA.player.data.name, action: this.playerInfo},
-      {text: 'Save', action:           this.save},
-      {text: 'Options', action:        this.options},
-      {text: 'Exit', action:           this.exit},
+    let options = [{
+        text: 'Pokédex',
+        action: this.pokedex
+      },
+      {
+        text: 'Pokémon',
+        action: this.pokemons
+      },
+      {
+        text: 'Bag',
+        action: this.bag
+      },
+      {
+        text: DATA.player.data.name,
+        action: this.playerInfo
+      },
+      {
+        text: 'Save',
+        action: this.save
+      },
+      {
+        text: 'Options',
+        action: this.options
+      },
+      {
+        text: 'Exit',
+        action: this.exit
+      },
     ];
-    
+
     this.menu = new Phaser.Group(game);
 
     var windowSkin = new Phaser.NinePatchImage(this.game, x, y, 'choice_1');
@@ -34,16 +57,16 @@ class Menu extends Phaser.Group{
     let paddingTop = 16;
     let paddingLeft = 32;
     let maxLength = 0;
-    for(let o of options){
-      o.x = x+paddingLeft
-      o.y = y+paddingTop
-      let line =  this.game.add.text(o.x, o.y, o.text, CONFIG.FONT.BLACK_SM);
+    for (let o of options) {
+      o.x = x + paddingLeft
+      o.y = y + paddingTop
+      let line = this.game.add.text(o.x, o.y, o.text, CONFIG.FONT.BLACK_SM);
       y += line.height
-      if(o.text.length > maxLength) maxLength = o.text.length
+      if (o.text.length > maxLength) maxLength = o.text.length
       windowSkin.targetHeight += line.height;
       this.menu.add(line)
     }
-    windowSkin.targetWidth += maxLength*16
+    windowSkin.targetWidth += maxLength * 16
 
 
     this.menu.x += this.game.width - windowSkin.targetWidth;
@@ -51,63 +74,62 @@ class Menu extends Phaser.Group{
     this.options = options;
     this.optionsIndex = 0;
     this.selarrow.x = this.options[this.optionsIndex].x - 2;
-    this.selarrow.y = this.options[this.optionsIndex].y + 2; 
+    this.selarrow.y = this.options[this.optionsIndex].y + 2;
     this.add(this.menu);
 
   }
 
-  onkeydown(){
-  }
-  onkeyup(key){
-    if(!this.alive) return;
-    if(key == Phaser.Keyboard.UP){
+  onkeydown() {}
+  onkeyup(key) {
+    if (!this.alive) return;
+    if (key == Phaser.Keyboard.UP) {
       this.optionsIndex--;
-      if(this.optionsIndex < 0){
+      if (this.optionsIndex < 0) {
         this.optionsIndex = this.options.length - 1;
       }
       this.selarrow.x = this.options[this.optionsIndex].x - 2;
       this.selarrow.y = this.options[this.optionsIndex].y + 2;
       GFX.choose.play();
     }
-    if(key == Phaser.Keyboard.DOWN){
+    if (key == Phaser.Keyboard.DOWN) {
       this.optionsIndex++;
-      if(this.optionsIndex == this.options.length){
+      if (this.optionsIndex == this.options.length) {
         this.optionsIndex = 0;
       }
       this.selarrow.x = this.options[this.optionsIndex].x - 2;
-      this.selarrow.y = this.options[this.optionsIndex].y + 2; 
+      this.selarrow.y = this.options[this.optionsIndex].y + 2;
       GFX.choose.play();
     }
-    if(key == Phaser.Keyboard.X || key == Phaser.Keyboard.ENTER){
+    if (key == Phaser.Keyboard.X || key == Phaser.Keyboard.ENTER) {
       this.options[this.optionsIndex].action.apply(this);
       this.game.eventEndSignal.dispatch();
       this.alive = false;
-      this.destroy();      
+      this.destroy();
     }
-    if(key == Phaser.Keyboard.Z){
+    if (key == Phaser.Keyboard.Z) {
       PKMN.release();
       this.game.eventEndSignal.dispatch();
       this.alive = false;
-      this.destroy();      
+      this.destroy();
     }
   }
 
-  pokedex(){
+  pokedex() {
     PKMN.release();
   }
-  pokemons(){
+  pokemons() {
     PKMN.release();
   }
-  bag(){
+  bag() {
     PKMN.release();
   }
-/**       
-* @function save
-* save the game DATA intolocalStorage,
-* to avoid circularity don't copy the Player Sprite
-* and the maps objects.
-*/
-  save(){
+  /**       
+   * @function save
+   * save the game DATA intolocalStorage,
+   * to avoid circularity don't copy the Player Sprite
+   * and the maps objects.
+   */
+  save() {
     let map = DATA.map;
     let player = DATA.player;
     DATA.map = {};
@@ -118,13 +140,13 @@ class Menu extends Phaser.Group{
     DATA.map = map;
     PKMN.release();
   }
-  playerInfo(){
+  playerInfo() {
     PKMN.release();
   }
-  options(){
+  options() {
     PKMN.release();
   }
-  exit(){
+  exit() {
     PKMN.release();
   }
 }

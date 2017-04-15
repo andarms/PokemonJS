@@ -3,11 +3,11 @@ import DATA from '../Data';
 
 import Message from './Message';
 
-class Choice extends Phaser.Group{
-  constructor(game, x, y, text, flag, options, defaultOption, optionsCtx){
+class Choice extends Phaser.Group {
+  constructor(game, x, y, text, flag, options, defaultOption, optionsCtx) {
     super(game);
-    
-    this.menu = new Phaser.Group(game);    
+
+    this.menu = new Phaser.Group(game);
     this.message = new Message(this.game, text, true);
     this.add(this.message);
 
@@ -22,16 +22,16 @@ class Choice extends Phaser.Group{
     let paddingTop = 16;
     let paddingLeft = 32;
     let maxLength = 0;
-    for(let o of options){
-      o.x = x+paddingLeft
-      o.y = y+paddingTop
-      let line =  this.game.add.text(o.x, o.y, o.text, CONFIG.FONT.BLACK);
+    for (let o of options) {
+      o.x = x + paddingLeft
+      o.y = y + paddingTop
+      let line = this.game.add.text(o.x, o.y, o.text, CONFIG.FONT.BLACK);
       y += line.height
-      if(o.text.length > maxLength) maxLength = o.text.length
+      if (o.text.length > maxLength) maxLength = o.text.length
       windowSkin.targetHeight += line.height;
       this.menu.add(line)
     }
-    windowSkin.targetWidth += maxLength*16
+    windowSkin.targetWidth += maxLength * 16
 
     this.menu.x = game.world.width - windowSkin.targetWidth;
     this.menu.y = this.message.roof - windowSkin.targetHeight;
@@ -40,7 +40,7 @@ class Choice extends Phaser.Group{
     this.optionsCtx = optionsCtx;
     this.optionsIndex = 0;
     this.selarrow.x = this.options[this.optionsIndex].x - 2;
-    this.selarrow.y = this.options[this.optionsIndex].y + 2; 
+    this.selarrow.y = this.options[this.optionsIndex].y + 2;
 
     this.defaultOption = defaultOption;
     this.flag = flag;
@@ -50,51 +50,51 @@ class Choice extends Phaser.Group{
 
   }
 
-  onkeydown(){}
-  onkeyup(key){
-    if(!this.alive) return;
-    if(this.message.alive){
+  onkeydown() {}
+  onkeyup(key) {
+    if (!this.alive) return;
+    if (this.message.alive) {
       this.message.onkeyup(key);
-      if(!this.message.alive){
+      if (!this.message.alive) {
         this.menu.visible = true;
       }
       return;
     }
-    if(key == Phaser.Keyboard.UP){
+    if (key == Phaser.Keyboard.UP) {
       this.optionsIndex--;
-      if(this.optionsIndex < 0){
+      if (this.optionsIndex < 0) {
         this.optionsIndex = this.options.length - 1;
       }
       this.selarrow.x = this.options[this.optionsIndex].x - 2;
-      this.selarrow.y = this.options[this.optionsIndex].y + 2; 
+      this.selarrow.y = this.options[this.optionsIndex].y + 2;
     }
-    if(key == Phaser.Keyboard.DOWN){
+    if (key == Phaser.Keyboard.DOWN) {
       this.optionsIndex++;
-      if(this.optionsIndex == this.options.length){
+      if (this.optionsIndex == this.options.length) {
         this.optionsIndex = 0;
       }
       this.selarrow.x = this.options[this.optionsIndex].x - 2;
-      this.selarrow.y = this.options[this.optionsIndex].y + 2; 
+      this.selarrow.y = this.options[this.optionsIndex].y + 2;
     }
-    if(key == Phaser.Keyboard.X || key == Phaser.Keyboard.ENTER){
-      DATA.FLAGS[this.flag] = this.options[this.optionsIndex].value != null ? this.options[this.optionsIndex].value :  this.optionsIndex + 1;
+    if (key == Phaser.Keyboard.X || key == Phaser.Keyboard.ENTER) {
+      DATA.FLAGS[this.flag] = this.options[this.optionsIndex].value != null ? this.options[this.optionsIndex].value : this.optionsIndex + 1;
       this.options[this.optionsIndex].action.apply(this.optionsCtx);
       this.game.eventEndSignal.dispatch();
       this.alive = false;
-      this.destroy();      
+      this.destroy();
     }
-    
+
     // Select the deafult option based on this.defaultOption    
     // (or 0 if the player can't cancel or -1 to don't choice any)
     // this.defaultOption is in length language and dont in array index language
-    if(key == Phaser.Keyboard.Z){
-      if(this.defaultOption != 0 && this.defaultOption != -1){
+    if (key == Phaser.Keyboard.Z) {
+      if (this.defaultOption != 0 && this.defaultOption != -1) {
         DATA.FLAGS[this.flag] = this.options[this.defaultOption - 1] != null ? this.options[this.defaultOption - 1].value : this.defaultOption;
-        this.options[this.defaultOption - 1 ].action.apply(this.optionsCtx);
+        this.options[this.defaultOption - 1].action.apply(this.optionsCtx);
         this.game.eventEndSignal.dispatch();
         this.alive = false;
         this.destroy();
-      }else if(this.defaultOption == -1){
+      } else if (this.defaultOption == -1) {
         DATA.FLAGS[this.flag] = this.defaultOption;
         this.game.eventEndSignal.dispatch();
         this.alive = false;
@@ -103,7 +103,6 @@ class Choice extends Phaser.Group{
     }
   }
 
-  update(){
-  }
+  update() {}
 }
 export default Choice;

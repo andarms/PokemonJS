@@ -3,12 +3,12 @@ import DATA from '../Data';
 import DebugGUI from '../DebugGUI';
 
 
-class Bootstrap extends Phaser.State{
-  preload(){
+class Bootstrap extends Phaser.State {
+  preload() {
     this.game.load.image('loading', 'Resources/Graphics/Pictures/loading.png')
   }
-  
-  create(){
+
+  create() {
     this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
     this.stage.smoothed = false;
     this.game.antialias = false;
@@ -34,35 +34,35 @@ class Bootstrap extends Phaser.State{
     this.state.start('Preload');
   }
 
-  onkeydown(event){
+  onkeydown(event) {
     // Only calls the onkeyup method of the cgo when the key pressed is in the keyboard control list.
-    if(CONFIG.KEYBAORD_CONTROLS.includes(event.keyCode)){
-      if(this.game.cgo){
+    if (CONFIG.KEYBAORD_CONTROLS.includes(event.keyCode)) {
+      if (this.game.cgo) {
         this.game.cgo.onkeydown(event.keyCode);
       }
     }
   }
-  
-  onkeyup(event){
+
+  onkeyup(event) {
     // Only calls the onkeyup method of the cgo when the key pressed is in the keyboard control list.
-    if(CONFIG.KEYBAORD_CONTROLS.includes(event.keyCode)){
-      if(this.game.cgo){
+    if (CONFIG.KEYBAORD_CONTROLS.includes(event.keyCode)) {
+      if (this.game.cgo) {
         this.game.cgo.onkeyup(event.keyCode);
       }
     }
   }
 
-  eventEndListener(){
+  eventEndListener() {
     let event = this.game.eventQueue.shift();
-    if(event){
+    if (event) {
       event.func.apply(event.scope);
-    }else{
+    } else {
       this.game.releaseCgo();
     }
   }
 
 
-  test(data){
+  test(data) {
     console.log(data)
   }
 

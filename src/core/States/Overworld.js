@@ -1,29 +1,29 @@
-import DATA       from '../Data';
+import DATA from '../Data';
 import * as utils from '../utils';
 
 import NPC from '../GameObjects/NPC';
 
-class Overwolrd extends Phaser.State{
+class Overwolrd extends Phaser.State {
 
-  init(mapFilename, tileX, tileY){
+  init(mapFilename, tileX, tileY) {
     this.mapFilename = mapFilename;
     this.tileX = parseInt(tileX);
     this.tileY = parseInt(tileY);
   }
 
-  create(){
+  create() {
     this.player = DATA.player;
     this.game.setCgo(this.player);
     this.createmap();
     this.player.setMapPosition(this.tileX, this.tileY);
     DATA.mapFilename = this.mapFilename;
-    if(this.map.properties.bgm){
+    if (this.map.properties.bgm) {
       this.bgm = this.game.add.audio(this.map.properties.bgm);
       this.bgm.loopFull();
     }
   }
 
-  createmap(){
+  createmap() {
     this.map = this.game.add.tilemap(this.mapFilename, 32, 32);
     this.map.addTilesetImage('Outside', 'Outside');
     this.map.addTilesetImage('interior_general', 'interior_general');
@@ -32,7 +32,7 @@ class Overwolrd extends Phaser.State{
     this.collisions = this.map.createLayer('Collisions');
     this.map.createLayer('1');
     this.map.createLayer('2');
-    
+
 
     this.collisions.resizeWorld();
     this.game.camera.follow(this.player);
@@ -44,37 +44,37 @@ class Overwolrd extends Phaser.State{
 
     // Group used to handle tall grass collisions
     DATA.map.grass = new Phaser.Group(this.game);
-    
+
     DATA.map.npcs = {}
 
 
 
     let animatedTiles = utils.findObjectsByType('AnimatedTile', this.map, 'Events', true)
     let animatedGroup = this.game.add.group()
-    for(var tile of animatedTiles){
+    for (var tile of animatedTiles) {
       animatedGroup.create(tile.x, tile.y, tile.properties.sprite)
       animatedGroup.callAll(
-        'animations.add', 
-        'animations', 
-        'initial', 
-        utils.range(parseInt(tile.properties.frames)), 
-        parseInt(tile.properties.fps), 
+        'animations.add',
+        'animations',
+        'initial',
+        utils.range(parseInt(tile.properties.frames)),
+        parseInt(tile.properties.fps),
         true);
       animatedGroup.callAll('animations.play', 'animations', 'initial');
     }
-    
+
     DATA.map.entities.add(this.player);
 
     let tallGrassTiles = utils.findObjectsByType('TallGrass', this.map, 'Events', true)
-    for(var tile of tallGrassTiles){
+    for (var tile of tallGrassTiles) {
       let sprite = DATA.map.entities.create(tile.x, tile.y, 'DustandGrass')
-      DATA.map.entities.callAll('animations.add', 'animations', 'rustling', [1 ,2, 3, 0], 10, false);
+      DATA.map.entities.callAll('animations.add', 'animations', 'rustling', [1, 2, 3, 0], 10, false);
       DATA.map.grass.add(sprite);
     }
 
     let npcs = utils.findObjectsByType('NPC', this.map, 'Events', true);
-    for(var tile of npcs){
-      let  npc = new NPC(this.game, tile.x, tile.y, tile.properties);
+    for (var tile of npcs) {
+      let npc = new NPC(this.game, tile.x, tile.y, tile.properties);
       DATA.map.entities.add(npc);
       DATA.map.npcs[tile.name] = npc;
     }
@@ -85,33 +85,33 @@ class Overwolrd extends Phaser.State{
     // Automatics script, no action button needed
     DATA.map.triggerscripts = new Phaser.Group(this.game);
     DATA.map.triggerscripts.enableBody = true;
-    let triggerscripts = utils.findObjectsByType('TriggerScript', this.map, 'Events');    
-    for(var i of triggerscripts){
-      let s = DATA.map.triggerscripts.add(this.game.add.sprite(i.x, i.y));    
+    let triggerscripts = utils.findObjectsByType('TriggerScript', this.map, 'Events');
+    for (var i of triggerscripts) {
+      let s = DATA.map.triggerscripts.add(this.game.add.sprite(i.x, i.y));
       s.properties = i.properties;
     }
 
     // 
     DATA.map.actionscripts = new Phaser.Group(this.game);
     DATA.map.actionscripts.enableBody = true;
-    let EventsTiles = utils.findObjectsByType('ActionScript', this.map, 'Events');    
-    for(var i of EventsTiles){
-      let s = DATA.map.actionscripts.add(this.game.add.sprite(i.x, i.y));    
+    let EventsTiles = utils.findObjectsByType('ActionScript', this.map, 'Events');
+    for (var i of EventsTiles) {
+      let s = DATA.map.actionscripts.add(this.game.add.sprite(i.x, i.y));
       s.properties = i.properties;
     }
 
 
     DATA.map.warps = new Phaser.Group(this.game);
     DATA.map.warps.enableBody = true;
-    let warps = utils.findObjectsByType('Warp', this.map, 'Events');    
-    for(var i of warps){
-      let s = DATA.map.warps.add(this.game.add.sprite(i.x, i.y));    
+    let warps = utils.findObjectsByType('Warp', this.map, 'Events');
+    for (var i of warps) {
+      let s = DATA.map.warps.add(this.game.add.sprite(i.x, i.y));
       s.properties = i.properties;
     }
     DATA.map.entities.sort('y', Phaser.Group.SORT_ASCENDING);
   }
 
-  shutdown(){
+  shutdown() {
     DATA.map.entities.remove(this.player);
     DATA.map.entities.destroy(true);
     this.bgm.stop();

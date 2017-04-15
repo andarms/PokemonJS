@@ -2,20 +2,20 @@ import CONFIG from '../config';
 import DATA from '../Data';
 import Message from './Message';
 
-class NameScreen extends Phaser.Group{
-  constructor(game){
+class NameScreen extends Phaser.Group {
+  constructor(game) {
     super(game);
     let x = 0;
     let y = 0;
     this.game = game;
-    this.bgani =  this.game.add.tileSprite(0, 0, 1024, 764, 'moving_bg');
+    this.bgani = this.game.add.tileSprite(0, 0, 1024, 764, 'moving_bg');
     var windowSkin = new Phaser.NinePatchImage(this.game, x, y, 'speech_hgss_1');
     windowSkin.targetWidth = 512;
     windowSkin.targetHeight = 96;
     this.add(this.bgani)
     this.add(windowSkin)
 
-    let text = this.game.add.text(x+96, y+10, "What's your name?", CONFIG.FONT.BLACK);
+    let text = this.game.add.text(x + 96, y + 10, "What's your name?", CONFIG.FONT.BLACK);
 
     let config = {
       font: '32px power_clearregular',
@@ -28,18 +28,18 @@ class NameScreen extends Phaser.Group{
       max: 10,
       alpha: .5
     }
-    this.input = this.game.add.inputField(x+96, y+48, config);
+    this.input = this.game.add.inputField(x + 96, y + 48, config);
     this.input.startFocus();
     let m = new Message(this.game, "Enter text using keyboard. Press ESC to cancel or ENTER to confirm.");
     this.addMultiple([m, text])
 
   }
 
-  onkeydown(){}
-  onkeyup(key){
-    if(key == Phaser.Keyboard.ENTER){
+  onkeydown() {}
+  onkeyup(key) {
+    if (key == Phaser.Keyboard.ENTER) {
       this.object.data.name = this.input.value;
-      if (this.object.data.name.trim() == ""){
+      if (this.object.data.name.trim() == "") {
         this.getDefaultName()
       }
       this.game.eventEndSignal.dispatch();
@@ -51,23 +51,23 @@ class NameScreen extends Phaser.Group{
     }
   }
 
-  update(){
+  update() {
     this.bgani.tilePosition.x += 0.5;
     // this.bgani.tilePosition.y -= 0.2;
   }
 }
 
-export class PlayerNameScreen extends NameScreen{
-  constructor(game){
+export class PlayerNameScreen extends NameScreen {
+  constructor(game) {
     super(game);
     this.object = DATA.player;
     this.add(this.object);
-    this.object.x = this.x+32;
-    this.object.y = this.y+24;
+    this.object.x = this.x + 32;
+    this.object.y = this.y + 24;
     this.object.animations.play('down');
   }
 
-  getDefaultName(){
+  getDefaultName() {
     this.object.data.name = DATA.defaultName[DATA.player.data.gender];
   }
 }

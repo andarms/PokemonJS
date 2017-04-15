@@ -8,67 +8,65 @@ export const GFX = {};
 
 ///Electron Config
 
-if(window.NodeRequire){
-  const {remote} = window.NodeRequire('electron');
-  const {Menu, MenuItem} = remote;
+if (window.NodeRequire) {
+  const {
+    remote
+  } = window.NodeRequire('electron');
+  const {
+    Menu,
+    MenuItem
+  } = remote;
   const win = remote.getCurrentWindow();
-  let template = [
-    {
+  let template = [{
       label: "Options",
-      submenu: [
-        {
-          label: "Video",
-          submenu:[
-            {
-              label: "x1", 
-              type: 'radio',
-              checked: true,
-              click: ()=>{
-                win.setSize(512, 432);
-                win.setFullScreen(false);
-              }
-            },
-            {
-              label: "x1.5", 
-              type: 'radio',
-              click: ()=>{
-                win.setSize(768, 624);
-                win.setFullScreen(false);
-              }
-            },
-            {
-              label: "x2", 
-              type: 'radio',
-              click: ()=>{
-                win.setSize(1024, 816);
-                win.setFullScreen(false);
-              }              
-            },
-            {
-              label: "Fullscreen", 
-              type: 'radio',
-              click: ()=>{
-                win.setFullScreen(true);
-              }
+      submenu: [{
+        label: "Video",
+        submenu: [{
+            label: "x1",
+            type: 'radio',
+            checked: true,
+            click: () => {
+              win.setSize(512, 432);
+              win.setFullScreen(false);
             }
-          ]
-        }        
-      ],
+          },
+          {
+            label: "x1.5",
+            type: 'radio',
+            click: () => {
+              win.setSize(768, 624);
+              win.setFullScreen(false);
+            }
+          },
+          {
+            label: "x2",
+            type: 'radio',
+            click: () => {
+              win.setSize(1024, 816);
+              win.setFullScreen(false);
+            }
+          },
+          {
+            label: "Fullscreen",
+            type: 'radio',
+            click: () => {
+              win.setFullScreen(true);
+            }
+          }
+        ]
+      }],
     },
     {
       label: 'debug',
-      submenu: [
-        {
-          label: 'Show Console',
-          type: 'checkbox',
-          click: ()=>{
-            win.toggleDevTools();
-          }
+      submenu: [{
+        label: 'Show Console',
+        type: 'checkbox',
+        click: () => {
+          win.toggleDevTools();
         }
-      ]
+      }]
     }
   ];
   var menu = Menu.buildFromTemplate(template);
   Menu.setApplicationMenu(menu);
 }
-

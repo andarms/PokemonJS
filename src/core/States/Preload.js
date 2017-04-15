@@ -1,13 +1,14 @@
 import CONFIG from '../config';
 import DATA from '../Data';
-import {GFX} from '../main';
+import {
+  GFX
+} from '../main';
 
-class Preload extends Phaser.State{
+class Preload extends Phaser.State {
   preload() {
-    let style = { font: "32px power_clearregular", fill: "#fff"}
-    this.loading = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading...", style);
+    this.loading = this.game.add.text(this.game.world.centerX, this.game.world.centerY, "Loading...", CONFIG.FONT.WHITE);
     this.loading.anchor.set(.5, .5);
-    this.bar = this.game.add.sprite(16, this.game.world.centerY + 50,"loading");
+    this.bar = this.game.add.sprite(16, this.game.world.centerY + 50, "loading");
     this.load.setPreloadSprite(this.bar);
 
 
@@ -45,7 +46,7 @@ class Preload extends Phaser.State{
     this.game.load.image('exp_bar', 'Resources/Graphics/Pictures/battle/exp_bar.png')
     this.game.load.image('command_menu', 'Resources/Graphics/Pictures/battle/command_menu.png');
     this.game.load.spritesheet('cmd_buttons', 'Resources/Graphics/Pictures/battle/cmd_buttons.png', 96, 48)
-    
+
     // General Pictures
     this.game.load.spritesheet('gender_symbol', 'Resources/Graphics/Pictures/gender_symbol.png', 16, 16)
     this.game.load.image('shadeFull', 'Resources/Graphics/Pictures/shadeFull.png')
@@ -63,7 +64,7 @@ class Preload extends Phaser.State{
     this.game.load.image('introbase', 'Resources/Graphics/Pictures/introbase.png')
     this.game.load.image('selarrow', 'Resources/Graphics/Pictures/selarrow.png')
     this.game.load.spritesheet('load_button', 'Resources/Graphics/Pictures/load_button.png', 384, 45)
-    
+
     // Title assets
     this.game.load.image('pokestart', 'Resources/Graphics/Titles/pokestart.png')
     this.game.load.image('custom_background', 'Resources/Graphics/Titles/custom_background.png')
@@ -84,12 +85,12 @@ class Preload extends Phaser.State{
     this.game.load.image('gen_6_particle2', 'Resources/Graphics/Titles/gen_6_particle2.png')
 
 
-    
+
     this.game.load.image('choice_1', 'Resources/Graphics/Windowskins/choice 1.png')
     this.game.load.image('speech_hgss_1', 'Resources/Graphics/Windowskins/speech hgss 1.png')
-    
-    
-    
+
+
+
     this.game.load.audio('title_origin', 'Resources/Audio/BGM/title_origin.ogg');
     this.game.load.audio('begin', 'Resources/Audio/BGM/begin.ogg');
     this.game.load.audio('021-Field04', 'Resources/Audio/BGM/021-Field04.ogg');
@@ -98,7 +99,7 @@ class Preload extends Phaser.State{
     this.game.load.audio('Choose', 'Resources/Audio/BGS/Choose.ogg');
 
     this.game.load.tilemap('Pallet_Town/pallet_town_01', 'Resources/Maps/Pallet_Town/pallet_town_01.json', null, Phaser.Tilemap.TILED_JSON)
-    this.game.load.tilemap('Pallet_Town/pallet_town_02', 'Resources/Maps/Pallet_Town/pallet_town_02.json', null, Phaser.Tilemap.TILED_JSON)    
+    this.game.load.tilemap('Pallet_Town/pallet_town_02', 'Resources/Maps/Pallet_Town/pallet_town_02.json', null, Phaser.Tilemap.TILED_JSON)
     this.game.load.tilemap('Route_1/route_1', 'Resources/Maps/Route_1/route_1.json', null, Phaser.Tilemap.TILED_JSON)
 
 
@@ -109,13 +110,13 @@ class Preload extends Phaser.State{
 
     GFX.choose = this.game.add.audio('Choose');
     GFX.select = this.game.add.audio('select');
-    
+
     //Windows skins
     this.game.cache.addNinePatch('choice_1', 'choice_1', null, 16, 16, 16, 16)
-    this.game.cache.addNinePatch('speech_hgss_1', 'speech_hgss_1', null, 32, 48, 16, 16)    
-    if(DATA.debug.skipTitle){
+    this.game.cache.addNinePatch('speech_hgss_1', 'speech_hgss_1', null, 32, 48, 16, 16)
+    if (DATA.debug.skipTitle) {
       this.state.start('Load');
-    }else{
+    } else {
       this.state.start('Title');
     }
   }
