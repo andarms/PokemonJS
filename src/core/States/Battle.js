@@ -1,4 +1,6 @@
 import CONFIG from '../config';
+import BattleMenu from '../GameObjects/BattleMenu';
+
 class Battle extends Phaser.State {
   preload() {
   }
@@ -33,11 +35,10 @@ class Battle extends Phaser.State {
       frames2.push(i);
     }
     front.animations.add('front', frames2, 30, true);
-    front.animations.play('front');
+    front.animations.play('front');  
 
-    let s= this.game.add.sprite(0, 384, 'command_menu');
-    s.anchor.set(0, 1);
-
+    this.menu = new BattleMenu(this.game, {name: 'Abomasnow'});
+    
     
     this.a = this.game.add.sprite(16, 300, 'hp_bar_bg')
     this.b = this.game.add.sprite(16, 300, 'hp_bar')
@@ -82,27 +83,10 @@ class Battle extends Phaser.State {
     this.foeLevel.addColor("#ffff00", 0);
     this.foeLevel.addColor("#ffffff", 3);
 
-    this.game.add.text(8, 344, 'What will Abomasnow do?', CONFIG.FONT.WHITE_SM)
-
-    this.btn = this.game.add.sprite(406, 304, 'btn3', 0)
-    this.btn2 = this.game.add.sprite(498, 304, 'btn3', 3)
-    this.btn3 = this.game.add.sprite(406, 352, 'btn3', 5)
-    this.btn4 = this.game.add.sprite(498, 352, 'btn3', 7)
-    this.btn.anchor.set(1, .5)
-    this.btn2.anchor.set(1, .5)
-    this.btn3.anchor.set(1, .5)
-    this.btn4.anchor.set(1, .5)
-    this.t1 = this.game.add.text(this.btn.centerX, this.btn.centerY, 'FIGTH', CONFIG.FONT.WHITE_XS);
-    this.t2 = this.game.add.text(this.btn2.centerX, this.btn2.centerY, 'PARTY', CONFIG.FONT.WHITE_XS);
-    this.t3 = this.game.add.text(this.btn3.centerX, this.btn3.centerY, 'BAG', CONFIG.FONT.WHITE_XS);
-    this.t4 = this.game.add.text(this.btn4.centerX, this.btn4.centerY, 'RUN', CONFIG.FONT.WHITE_XS);
-    this.t1.anchor.set(.5, .4)
-    this.t2.anchor.set(.5, .4)
-    this.t3.anchor.set(.5, .4)
-    this.t4.anchor.set(.5, .4)
+    
 
 
-    this.game.setCgo(this)
+    this.game.setCgo(this.menu);
     
   }
 

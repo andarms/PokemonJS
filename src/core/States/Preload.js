@@ -43,10 +43,8 @@ class Preload extends Phaser.State{
     this.game.load.spritesheet('foe_hp_bar', 'Resources/Graphics/Pictures/battle/foe_hp_bar.png', 224, 32)
     this.game.load.image('exp_bar_bg', 'Resources/Graphics/Pictures/battle/exp_bar_bg.png')
     this.game.load.image('exp_bar', 'Resources/Graphics/Pictures/battle/exp_bar.png')
-    this.game.load.image('command_menu', 'Resources/Graphics/Pictures/battle/command_menu.png')
-    this.game.load.spritesheet('btn', 'Resources/Graphics/Pictures/battle/btn.png',64, 32)
-    this.game.load.spritesheet('btn2', 'Resources/Graphics/Pictures/battle/btn2.png', 72, 40)
-    this.game.load.spritesheet('btn3', 'Resources/Graphics/Pictures/battle/btn3.png', 96, 48)
+    this.game.load.image('command_menu', 'Resources/Graphics/Pictures/battle/command_menu.png');
+    this.game.load.spritesheet('cmd_buttons', 'Resources/Graphics/Pictures/battle/cmd_buttons.png', 96, 48)
     
     // General Pictures
     this.game.load.spritesheet('gender_symbol', 'Resources/Graphics/Pictures/gender_symbol.png', 16, 16)
@@ -110,6 +108,7 @@ class Preload extends Phaser.State{
     this.game.add.plugin(PhaserInput.Plugin);
 
     GFX.choose = this.game.add.audio('Choose');
+    GFX.select = this.game.add.audio('select');
     
     //Windows skins
     this.game.cache.addNinePatch('choice_1', 'choice_1', null, 16, 16, 16, 16)
