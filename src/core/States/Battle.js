@@ -9,8 +9,8 @@ class Battle extends Phaser.State {
     this.stage.backgroundColor = "#890045"
 
     // this.battleMessage = new Phaser.Group(this.game)
-    let bg = this.game.add.sprite(this.game.world.centerX, this.game.world.centerY, 'bg-meadow');
-    bg.anchor.set(.5,.5)
+    let bg = this.game.add.sprite(this.game.camera.view.x + this.game.width/2, this.game.camera.view.y+this.game.height/2, 'bg-meadow');
+    bg.anchor.set(.5);
     
     let playerBass = this.game.add.sprite(-150,234, 'playerbaseCityGrass')
     let fronBass = this.game.add.sprite(250, 260, 'enemybaseCityGrass')
@@ -38,7 +38,7 @@ class Battle extends Phaser.State {
     front.animations.play('front');  
 
     this.menu = new BattleMenu(this.game, {name: 'Abomasnow'});
-    
+
     
     this.a = this.game.add.sprite(16, 300, 'hp_bar_bg')
     this.b = this.game.add.sprite(16, 300, 'hp_bar')

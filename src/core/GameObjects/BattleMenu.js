@@ -1,4 +1,5 @@
 import CONFIG from '../config';
+import DATA   from '../Data';
 import {GFX}  from '../main';
 
 class BattleMenu extends Phaser.Group{
@@ -44,7 +45,7 @@ class BattleMenu extends Phaser.Group{
         frame:       7, 
         x:           x + 96, 
         y:           y + 48,
-        action:      this.test
+        action:      this.run
       },
     ];
     this.optInx = 0;
@@ -111,6 +112,10 @@ class BattleMenu extends Phaser.Group{
 
   test(){
     console.log("not yet")
+  }
+
+  run(){
+    this.game.state.start('Overworld', true, false, DATA.mapFilename, DATA.player.data.currTile.x, DATA.player.data.currTile.y)
   }
 
 }

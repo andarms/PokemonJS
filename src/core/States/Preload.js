@@ -114,7 +114,7 @@ class Preload extends Phaser.State{
     this.game.cache.addNinePatch('choice_1', 'choice_1', null, 16, 16, 16, 16)
     this.game.cache.addNinePatch('speech_hgss_1', 'speech_hgss_1', null, 32, 48, 16, 16)    
     if(DATA.debug.skipTitle){
-      this.state.start('Battle');
+      this.state.start('Load');
     }else{
       this.state.start('Title');
     }

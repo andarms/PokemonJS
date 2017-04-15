@@ -41,7 +41,7 @@ class LoadState extends Phaser.State {
     let marginY = 5;
     for (var option of this.menu){
       option.sprite = this.game.add.sprite(x, y, 'load_button')
-      var text = this.game.add.text(x+paddingLeft, y+paddingTop, option.name, CONFIG.FONT.WHITE);
+      var text = this.game.add.text(x+paddingLeft, y+paddingTop, option.name, CONFIG.FONT.WHITE_SM);
       y += h + marginY;
     }
     

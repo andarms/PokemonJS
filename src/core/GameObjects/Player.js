@@ -133,35 +133,33 @@ class Player extends Phaser.Sprite{
       // Base in http://pokemonessentials.wikia.com/wiki/Wild_encounters
       // I will have 12 lines to write pokemons that can appear, 
       // each line has a specific probability (20, 20, 10, 10, 10, 10, 5, 5, 4, 4, 1, 1) respectively
-      PKMN.start(this);
       let randPokemon = Math.random();
       if(randPokemon < .20 ){
-        PKMN.msgbox("Pokemon #1 has appear");        
+        console.log('Pokemon1')
       }else if(randPokemon > .20 && randPokemon < .40  ){        
-        PKMN.msgbox("Pokemon #2 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .40 && randPokemon < .50  ){        
-        PKMN.msgbox("Pokemon #3 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .50 && randPokemon < .60  ){        
-        PKMN.msgbox("Pokemon #4 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .60 && randPokemon < .70  ){        
-        PKMN.msgbox("Pokemon #5 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .70 && randPokemon < .80  ){        
-        PKMN.msgbox("Pokemon #6 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .80 && randPokemon < .85  ){        
-        PKMN.msgbox("Pokemon #7 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .85 && randPokemon < .90  ){        
-        PKMN.msgbox("Pokemon #8 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .90 && randPokemon < .94  ){        
-        PKMN.msgbox("Pokemon #9 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .94 && randPokemon < .98  ){        
-        PKMN.msgbox("Pokemon #10 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .98 && randPokemon < .99  ){        
-        PKMN.msgbox("Pokemon #11 has appear");                
+        console.log('Pokemon1')
       }else if(randPokemon > .99 && randPokemon < 1  ){        
-        PKMN.msgbox("Pokemon #12 has appear");                
+        console.log('Pokemon1')
       }
-      PKMN.release();
-      PKMN.end();
+      this.game.state.start('Battle');
     }
 
   }
